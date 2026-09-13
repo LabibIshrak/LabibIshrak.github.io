@@ -1,7 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Outfit } from "next/font/google";
 import { Runtime } from "@/components/runtime";
 import "./globals.css";
 import "./editorial.css";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-outfit",
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +30,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={outfit.variable}>
       <body>
         <a className="skip-link" href="#main">
           Skip to content

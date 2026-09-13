@@ -57,7 +57,7 @@ export function HeroMarquee() {
 
     media.add("(prefers-reduced-motion: no-preference)", () => {
       // Pixels per second.
-      const DEFAULT_SPEED = 70;
+      const DEFAULT_SPEED = 140;
 
       const motion = {
         speed: DEFAULT_SPEED,
