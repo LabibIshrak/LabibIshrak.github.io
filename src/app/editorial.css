@@ -51,9 +51,9 @@
 }
 
 .editorial-about .editorial-about-button {
-  background: #f0f0f0;
-  border-color: rgb(0 0 0 / 12%);
-  color: #1a1a1a;
+  background: #1a1a1a;
+  border-color: rgb(0 0 0 / 20%);
+  color: #ffffff;
 }
 
 .editorial-about .editorial-biography > div > p {

@@ -55,7 +55,7 @@ function Preloader() {
     let alreadySeen = false;
 
     try {
-      alreadySeen = sessionStorage.getItem("bibni-intro-seen") === "1";
+      alreadySeen = sessionStorage.getItem("labib-intro-seen") === "1";
     } catch {
       // The portfolio still works when browser storage is unavailable.
     }
@@ -72,7 +72,7 @@ function Preloader() {
     const timeline = gsap.timeline({
       onComplete: () => {
         try {
-          sessionStorage.setItem("bibni-intro-seen", "1");
+          sessionStorage.setItem("labib-intro-seen", "1");
         } catch {
           // Storage persistence is optional.
         }

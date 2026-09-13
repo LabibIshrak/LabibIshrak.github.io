@@ -6,7 +6,7 @@ export const profile = {
   timezone: "Asia/Dhaka",
 
   // Add your real contact destinations before publishing.
-  email: "",
+  email: "241hasinishraklabib@gmail.com",
   github: "",
   linkedin: "",
   lastfm: "",
