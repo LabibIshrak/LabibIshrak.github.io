@@ -19,6 +19,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 35px;
+  overflow-x: clip;
 }
 
 body {
@@ -915,6 +916,7 @@ button:focus-visible,
 
 .case-artwork svg {
   max-height: 850px;
+  max-width: 100%;
 }
 
 .case-overview {
@@ -1156,15 +1158,18 @@ button:focus-visible,
   }
 
   .mobile-menu:not([hidden]) {
-    position: absolute;
+    position: fixed;
     top: 85px;
     left: 14px;
     right: 14px;
     display: block;
+    max-height: calc(100svh - 100px);
+    overflow-y: auto;
     padding: 20px;
     border-radius: 12px;
     background: var(--background);
     box-shadow: 0 25px 50px rgb(0 0 0 / 18%);
+    z-index: 100;
   }
 
   .mobile-menu a {
@@ -1195,7 +1200,7 @@ button:focus-visible,
   }
 
   .hero-introduction {
-    top: 115px;
+    top: clamp(95px, 15%, 125px);
     left: var(--gutter);
     right: auto;
     width: calc(100% - 44px);
@@ -1220,6 +1225,7 @@ button:focus-visible,
 
   .location-badge {
     top: 49%;
+    min-width: 0;
     padding: 13px 13px 13px 20px;
     gap: 15px;
     font-size: 10px;
@@ -1243,12 +1249,12 @@ button:focus-visible,
 
   .hero-bottom {
     bottom: 18px;
-    font-size: 7px;
+    font-size: 9px;
     letter-spacing: 0.04em;
   }
 
   .hero-bottom > span {
-    max-width: 115px;
+    max-width: 130px;
     line-height: 1.6;
   }
 
@@ -1415,7 +1421,7 @@ button:focus-visible,
   }
 
   .footer h2 {
-    font-size: 58px;
+    font-size: clamp(48px, 15vw, 58px);
   }
 }
 
@@ -1534,6 +1540,7 @@ button:focus-visible,
   display: block;
   width: 34px;
   height: 34px;
+  filter: drop-shadow(0 0 6px rgb(255 255 255 / 0.08));
 }
 
 /* Override the old ".globe-circle svg" dimensions. */
@@ -1546,11 +1553,11 @@ button:focus-visible,
 
   overflow: visible;
   stroke: currentColor;
-  stroke-width: 1.6;
+  stroke-width: 1.15;
 }
 
 .location-globe-frame {
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .location-globe-rotor {
@@ -1558,13 +1565,13 @@ button:focus-visible,
   inset: 0;
 
   transform-style: preserve-3d;
-  animation: location-globe-spin 6s linear infinite;
+  animation: location-globe-spin 8s linear infinite;
 }
 
 .location-globe-meridian {
   backface-visibility: visible;
   transform-origin: center;
-  opacity: 0.8;
+  opacity: 0.55;
 }
 
 @keyframes location-globe-spin {

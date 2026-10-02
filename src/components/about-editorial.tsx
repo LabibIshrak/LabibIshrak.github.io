@@ -1,19 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Minus } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { profile } from "@/lib/content";
+import { TransitionLink } from "./runtime";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const statement =
-  "Turning complex ideas into software that feels clear, considered, and effortless to use.";
+  "Second-year undergraduate building end-to-end solutions and exploring what's next in AI & ML research.";
 
 export function AboutEditorial() {
   const rootRef = useRef<HTMLElement>(null);
-  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const media = gsap.matchMedia();
@@ -40,14 +39,6 @@ export function AboutEditorial() {
     return () => media.revert();
   }, []);
 
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, [expanded]);
-
   return (
     <section
       ref={rootRef}
@@ -69,48 +60,24 @@ export function AboutEditorial() {
 
           <div className="editorial-aside">
             <p>
-              I’m Labib—a CS and Software Engineering
-              student based in Bangladesh. My interests connect C++,
-              Flutter, and the systems behind thoughtful applications.
+              I&#39;m Labib — a Computer Science &amp; Software Engineering
+              student who ships production-grade applications and dives deep
+              into machine learning research. From intelligent systems to
+              polished interfaces, I bridge the gap between idea and
+              implementation.
             </p>
 
-            <button
-              type="button"
+            <TransitionLink
+              href="/about"
               className="editorial-about-button"
               data-magnetic
-              aria-expanded={expanded}
-              aria-controls="extended-biography"
-              onClick={() => setExpanded((value) => !value)}
+              aria-label="Learn more about Labib"
             >
               <span className="editorial-button-content">
-                {expanded ? "A little less" : "About me"}
-                {expanded ? (
-                  <Minus size={18} aria-hidden="true" />
-                ) : (
-                  <ArrowUpRight size={18} aria-hidden="true" />
-                )}
+                About me
+                <ArrowUpRight size={18} aria-hidden="true" />
               </span>
-            </button>
-          </div>
-        </div>
-
-        <div
-          id="extended-biography"
-          className="editorial-biography"
-          hidden={!expanded}
-        >
-          <span className="editorial-label">BEYOND THE INTRODUCTION</span>
-
-          <div>
-            <p>{profile.about}</p>
-
-            <ul className="editorial-skills" aria-label="Areas of interest">
-              <li>C++</li>
-              <li>Flutter</li>
-              <li>Data structures</li>
-              <li>Systems design</li>
-              <li>Visual experimentation</li>
-            </ul>
+            </TransitionLink>
           </div>
         </div>
       </div>
