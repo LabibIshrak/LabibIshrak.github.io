@@ -53,11 +53,11 @@ export function Portfolio() {
   return (
     <div ref={rootRef}>
       <section className="hero">
-        <div className="hero-orbit" aria-hidden="true" />
-
         <div className="location-badge">
           <span className="location-badge-copy">
-            Located in
+            Located
+            <br />
+            in
             <br />
             Bangladesh
           </span>
@@ -77,19 +77,12 @@ export function Portfolio() {
         </div>
 
         <div className="hero-introduction">
-          <ArrowDownRight className="hero-direction" strokeWidth={1.3} />
-          <p>Software Developer</p>
-          <p className="hero-subtext">{profile.introduction}</p>
+          <ArrowDownRight className="hero-direction" strokeWidth={1.5} />
+          <p>Software Engineer</p>
+          <p className="hero-subtext">&amp; ML Researcher</p>
         </div>
 
         <HeroMarquee />
-
-        <div className="hero-bottom">
-          <span>CODE. SYSTEMS. A LITTLE CURIOSITY.</span>
-          <a href="#about" data-magnetic>
-            SCROLL TO EXPLORE <ArrowDownRight size={17} />
-          </a>
-        </div>
       </section>
       {/* The closing section above belongs to your existing hero. */}
 
