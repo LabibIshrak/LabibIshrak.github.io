@@ -33,7 +33,7 @@ export function Navigation() {
       </TransitionLink>
 
       <nav className="desktop-navigation" aria-label="Main navigation">
-        <a href="/#about" data-magnetic>About</a>
+        <TransitionLink href="/about" data-magnetic>About</TransitionLink>
         <a href="/#work" data-magnetic>Work</a>
         <a href="#contact" data-magnetic>
           Contact <ArrowUpRight size={15} />
@@ -57,16 +57,18 @@ export function Navigation() {
         hidden={!open}
         aria-label="Mobile navigation"
       >
-        {[
-          ["About", "/#about"],
-          ["Work", "/#work"],
-          ["Contact", "#contact"],
-        ].map(([label, href]) => (
-          <a key={label} href={href} onClick={() => setOpen(false)}>
-            {label}
-            <ArrowUpRight />
-          </a>
-        ))}
+        <TransitionLink href="/about" onClick={() => setOpen(false)}>
+          About
+          <ArrowUpRight />
+        </TransitionLink>
+        <a href="/#work" onClick={() => setOpen(false)}>
+          Work
+          <ArrowUpRight />
+        </a>
+        <a href="#contact" onClick={() => setOpen(false)}>
+          Contact
+          <ArrowUpRight />
+        </a>
       </nav>
     </header>
   );
