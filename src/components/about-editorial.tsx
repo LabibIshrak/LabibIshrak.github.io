@@ -1,48 +1,16 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TransitionLink } from "./runtime";
-
-gsap.registerPlugin(ScrollTrigger);
+import { AboutEditorialMotion } from "./about-editorial-motion";
 
 const statement =
   "Second-year undergraduate building end-to-end solutions and exploring what's next in AI & ML research.";
 
+const SECTION_ID = "about";
+
 export function AboutEditorial() {
-  const rootRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const media = gsap.matchMedia();
-
-    media.add("(prefers-reduced-motion: no-preference)", () => {
-      const context = gsap.context(() => {
-        gsap.from(".editorial-word", {
-          opacity: 0.18,
-          y: 8,
-          stagger: 0.045,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".editorial-statement",
-            start: "top 85%",
-            once: true,
-          },
-        });
-      }, rootRef);
-
-      return () => context.revert();
-    });
-
-    return () => media.revert();
-  }, []);
-
   return (
     <section
-      ref={rootRef}
-      id="about"
+      id={SECTION_ID}
       className="editorial-about"
       aria-labelledby="editorial-about-title"
     >
@@ -81,6 +49,8 @@ export function AboutEditorial() {
           </div>
         </div>
       </div>
+
+      <AboutEditorialMotion sectionId={SECTION_ID} />
     </section>
   );
 }

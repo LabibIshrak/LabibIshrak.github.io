@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useRef,
   useState,
   type ComponentProps,
@@ -12,16 +13,15 @@ import {
 } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  motion,
-  useAnimationControls,
-  useReducedMotion,
-} from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
+import { gsap, ScrollTrigger, CustomEase } from "@/lib/gsap";
+import { INTRO_CLASS, INTRO_STORAGE_KEY } from "@/lib/boot";
 
-gsap.registerPlugin(ScrollTrigger);
+// Same cubic-bezier the curtain used with framer-motion: [0.76, 0, 0.24, 1].
+const CURTAIN_EASE = CustomEase.create(
+  "route-curtain",
+  "M0,0 C0.76,0 0.24,1 1,1",
+);
 
 type NavigationContextValue = {
   navigate: (href: string) => Promise<void>;
@@ -40,8 +40,26 @@ const greetings = [
   "নমস্কার",
 ];
 
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function scrollToHash(
+  hash: string,
+  lenis: Lenis | null,
+  immediate: boolean,
+) {
+  const target = document.getElementById(decodeURIComponent(hash));
+  if (!target) return;
+
+  if (lenis) {
+    lenis.scrollTo(target, immediate ? { immediate: true, force: true } : {});
+  } else {
+    target.scrollIntoView(immediate ? { behavior: "instant" } : undefined);
+  }
+}
+
 function Preloader() {
-  const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLSpanElement>(null);
   const [visible, setVisible] = useState(true);
@@ -52,19 +70,12 @@ function Preloader() {
 
     if (!panel || !word) return;
 
-    let alreadySeen = false;
+    const root = document.documentElement;
 
-    try {
-      alreadySeen = sessionStorage.getItem("labib-intro-seen") === "1";
-    } catch {
-      // The portfolio still works when browser storage is unavailable.
-    }
-
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (pathname !== "/" || alreadySeen || reduced) {
+    // The pre-paint boot script decides whether the intro should play
+    // (first visit to "/" this session, no reduced-motion preference).
+    // Without that class the panel is display:none, so nothing flashes.
+    if (!root.classList.contains(INTRO_CLASS)) {
       setVisible(false);
       return;
     }
@@ -72,11 +83,12 @@ function Preloader() {
     const timeline = gsap.timeline({
       onComplete: () => {
         try {
-          sessionStorage.setItem("labib-intro-seen", "1");
+          sessionStorage.setItem(INTRO_STORAGE_KEY, "1");
         } catch {
           // Storage persistence is optional.
         }
 
+        root.classList.remove(INTRO_CLASS);
         setVisible(false);
       },
     });
@@ -104,8 +116,6 @@ function Preloader() {
     return () => {
       timeline.kill();
     };
-    // This is an initial-visit treatment, not a route-change animation.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!visible) return null;
@@ -141,7 +151,37 @@ function Cursor() {
           ease: "power3.out",
         });
 
+        // Cached hit-testing results for the element under the pointer.
+        let lastTarget: EventTarget | null = null;
+        let magnet: HTMLElement | null = null;
+        let link: Element | null = null;
+        let labelTarget: HTMLElement | null = null;
+
+        // Magnet state. The resting center is measured once per magnet
+        // (and again after scroll/resize) instead of on every move.
         let activeMagnet: HTMLElement | null = null;
+        let magnetX: ReturnType<typeof gsap.quickTo> | null = null;
+        let magnetY: ReturnType<typeof gsap.quickTo> | null = null;
+        let restCenterX = 0;
+        let restCenterY = 0;
+        let boundsDirty = true;
+
+        // Last values written to the DOM, so we only write on change.
+        let shown = false;
+        let lastMode = cursor.dataset.mode ?? "default";
+        let lastLabel = cursor.textContent ?? "";
+
+        function measureMagnet(element: HTMLElement) {
+          const bounds = element.getBoundingClientRect();
+          // Subtract the current magnetic offset to get the resting center.
+          restCenterX =
+            bounds.left + bounds.width / 2 -
+            (gsap.getProperty(element, "x") as number);
+          restCenterY =
+            bounds.top + bounds.height / 2 -
+            (gsap.getProperty(element, "y") as number);
+          boundsDirty = false;
+        }
 
         function resetMagnet() {
           if (!activeMagnet) return;
@@ -155,15 +195,25 @@ function Cursor() {
           });
 
           activeMagnet = null;
+          magnetX = null;
+          magnetY = null;
+        }
+
+        function invalidateBounds() {
+          boundsDirty = true;
         }
 
         function move(event: PointerEvent) {
           if (!cursor) return;
 
           const target = event.target as HTMLElement;
-          const magnet = target.closest<HTMLElement>("[data-magnetic]");
-          const link = target.closest("a, button");
-          const labelTarget = target.closest<HTMLElement>("[data-cursor]");
+
+          if (target !== lastTarget) {
+            lastTarget = target;
+            magnet = target.closest<HTMLElement>("[data-magnetic]");
+            link = target.closest("a, button");
+            labelTarget = target.closest<HTMLElement>("[data-cursor]");
+          }
 
           if (activeMagnet && activeMagnet !== magnet) {
             resetMagnet();
@@ -173,21 +223,34 @@ function Cursor() {
           let y = event.clientY;
 
           if (magnet) {
-            activeMagnet = magnet;
+            if (activeMagnet !== magnet) {
+              activeMagnet = magnet;
+              gsap.killTweensOf(magnet, "x,y");
+              measureMagnet(magnet);
+              magnetX = gsap.quickTo(magnet, "x", {
+                duration: 0.35,
+                ease: "power3.out",
+              });
+              magnetY = gsap.quickTo(magnet, "y", {
+                duration: 0.35,
+                ease: "power3.out",
+              });
+            } else if (boundsDirty) {
+              measureMagnet(magnet);
+            }
 
-            const bounds = magnet.getBoundingClientRect();
-            const centerX = bounds.left + bounds.width / 2;
-            const centerY = bounds.top + bounds.height / 2;
+            // Live center = resting center + current magnetic offset,
+            // identical to reading getBoundingClientRect() each move but
+            // without forcing a layout.
+            const centerX =
+              restCenterX + (gsap.getProperty(magnet, "x") as number);
+            const centerY =
+              restCenterY + (gsap.getProperty(magnet, "y") as number);
             const dx = event.clientX - centerX;
             const dy = event.clientY - centerY;
 
-            gsap.to(magnet, {
-              x: dx * 0.16,
-              y: dy * 0.16,
-              duration: 0.35,
-              ease: "power3.out",
-              overwrite: "auto",
-            });
+            magnetX?.(dx * 0.16);
+            magnetY?.(dy * 0.16);
 
             // The cursor approaches the target's center while retaining
             // a small amount of direct pointer movement.
@@ -198,8 +261,12 @@ function Cursor() {
           moveX(x);
           moveY(y);
 
-          cursor.style.opacity = "1";
-          cursor.dataset.mode = magnet
+          if (!shown) {
+            cursor.style.opacity = "1";
+            shown = true;
+          }
+
+          const mode = magnet
             ? "magnetic"
             : labelTarget
               ? "label"
@@ -207,21 +274,38 @@ function Cursor() {
                 ? "link"
                 : "default";
 
-          cursor.textContent = labelTarget?.dataset.cursor ?? "";
+          if (mode !== lastMode) {
+            cursor.dataset.mode = mode;
+            lastMode = mode;
+          }
+
+          const label = labelTarget?.dataset.cursor ?? "";
+
+          if (label !== lastLabel) {
+            cursor.textContent = label;
+            lastLabel = label;
+          }
         }
 
         function leave() {
-          if (cursor) cursor.style.opacity = "0";
+          if (cursor && shown) {
+            cursor.style.opacity = "0";
+            shown = false;
+          }
           resetMagnet();
         }
 
         window.addEventListener("pointermove", move);
         window.addEventListener("blur", leave);
+        window.addEventListener("scroll", invalidateBounds, { passive: true });
+        window.addEventListener("resize", invalidateBounds);
         document.documentElement.addEventListener("pointerleave", leave);
 
         return () => {
           window.removeEventListener("pointermove", move);
           window.removeEventListener("blur", leave);
+          window.removeEventListener("scroll", invalidateBounds);
+          window.removeEventListener("resize", invalidateBounds);
           document.documentElement.removeEventListener(
             "pointerleave",
             leave,
@@ -273,7 +357,6 @@ export function TransitionLink({
           event.altKey ||
           props.target === "_blank" ||
           !href.startsWith("/") ||
-          href.includes("#") ||
           !context
         ) {
           return;
@@ -291,18 +374,27 @@ export function TransitionLink({
   );
 }
 
+type PendingNavigation = {
+  path: string;
+  hash: string;
+};
+
 export function Runtime({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const reduced = useReducedMotion();
-  const curtain = useAnimationControls();
 
+  const curtainRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
-  const pendingRef = useRef<string | null>(null);
+  const pathnameRef = useRef(pathname);
+  const pendingRef = useRef<PendingNavigation | null>(null);
   const busyRef = useRef(false);
   const watchdogRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    pathnameRef.current = pathname;
+  }, [pathname]);
 
   useEffect(() => {
     const media = gsap.matchMedia();
@@ -330,48 +422,74 @@ export function Runtime({ children }: { children: ReactNode }) {
     return () => media.revert();
   }, []);
 
+  // Stable for the lifetime of the app: reads the pathname from a ref,
+  // so consumers of the context don't re-render on every route change.
   const navigate = useCallback(
     async (href: string) => {
-      if (busyRef.current || href === pathname) return;
+      if (busyRef.current) return;
 
-      if (reduced) {
+      const hashIndex = href.indexOf("#");
+      const path =
+        hashIndex === -1 ? href : href.slice(0, hashIndex) || "/";
+      const hash = hashIndex === -1 ? "" : href.slice(hashIndex + 1);
+
+      // Same page: only an in-page anchor jump (e.g. "/#work" on "/").
+      if (path === pathnameRef.current) {
+        if (hash) {
+          window.history.pushState(null, "", href);
+          scrollToHash(hash, lenisRef.current, false);
+        }
+        return;
+      }
+
+      if (prefersReducedMotion()) {
+        router.push(href);
+        return;
+      }
+
+      const curtain = curtainRef.current;
+      if (!curtain) {
         router.push(href);
         return;
       }
 
       busyRef.current = true;
       setBusy(true);
-      pendingRef.current = href;
+      pendingRef.current = { path, hash };
       lenisRef.current?.stop();
 
       // A failed navigation should never permanently cover the website.
       watchdogRef.current = setTimeout(() => {
         pendingRef.current = null;
-        curtain.set({ y: "-101%" });
+        gsap.killTweensOf(curtain);
+        gsap.set(curtain, { y: 0, yPercent: -101 });
         busyRef.current = false;
         setBusy(false);
         lenisRef.current?.start();
       }, 12000);
 
-      curtain.set({ y: "101%" });
+      gsap.killTweensOf(curtain);
+      gsap.set(curtain, { y: 0, yPercent: 101 });
 
-      await curtain.start({
-        y: "0%",
-        transition: {
+      await new Promise<void>((resolve) => {
+        gsap.to(curtain, {
+          yPercent: 0,
           duration: 0.55,
-          ease: [0.76, 0, 0.24, 1],
-        },
+          ease: CURTAIN_EASE,
+          onComplete: resolve,
+        });
       });
 
       router.push(href, { scroll: false });
     },
-    [curtain, pathname, reduced, router],
+    [router],
   );
 
   useEffect(() => {
     let frame = 0;
+    const pending = pendingRef.current;
 
-    if (pendingRef.current === pathname) {
+    if (pending && pending.path === pathname) {
       pendingRef.current = null;
 
       if (watchdogRef.current) {
@@ -393,31 +511,41 @@ export function Runtime({ children }: { children: ReactNode }) {
       frame = requestAnimationFrame(() => {
         ScrollTrigger.refresh();
 
+        if (pending.hash) {
+          scrollToHash(pending.hash, lenisRef.current, true);
+        }
+
         const heading = document.querySelector<HTMLElement>(
           "[data-page-heading]",
         );
         heading?.focus({ preventScroll: true });
 
-        void curtain
-          .start({
-            y: "-101%",
-            transition: {
-              duration: 0.65,
-              ease: [0.76, 0, 0.24, 1],
-            },
-          })
-          .then(() => {
-            busyRef.current = false;
-            setBusy(false);
-            lenisRef.current?.start();
-          });
+        const curtain = curtainRef.current;
+
+        const finish = () => {
+          busyRef.current = false;
+          setBusy(false);
+          lenisRef.current?.start();
+        };
+
+        if (!curtain) {
+          finish();
+          return;
+        }
+
+        gsap.to(curtain, {
+          yPercent: -101,
+          duration: 0.65,
+          ease: CURTAIN_EASE,
+          onComplete: finish,
+        });
       });
     } else {
       frame = requestAnimationFrame(() => ScrollTrigger.refresh());
     }
 
     return () => cancelAnimationFrame(frame);
-  }, [pathname, curtain]);
+  }, [pathname]);
 
   useEffect(() => {
     return () => {
@@ -425,22 +553,29 @@ export function Runtime({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  const contextValue = useMemo(
+    () => ({ navigate, busy }),
+    [navigate, busy],
+  );
+
   return (
-    <NavigationContext.Provider value={{ navigate, busy }}>
+    <NavigationContext.Provider value={contextValue}>
       {children}
       <Cursor />
       <Preloader />
 
-      <motion.div
+      <div
+        ref={curtainRef}
         className="route-curtain"
-        initial={{ y: "101%" }}
-        animate={curtain}
-        style={{ pointerEvents: busy ? "auto" : "none" }}
+        style={{
+          transform: "translateY(101%)",
+          pointerEvents: busy ? "auto" : "none",
+        }}
         aria-hidden="true"
       >
         <span>Labib.</span>
         <span className="curtain-caption">A DIFFERENT PERSPECTIVE</span>
-      </motion.div>
+      </div>
 
       <span className="sr-only" role="status">
         {busy ? "Opening page" : ""}

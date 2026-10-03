@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit } from "next/font/google";
 import { Runtime } from "@/components/runtime";
+import { bootScript } from "@/lib/boot";
 import "./globals.css";
 import "./editorial.css";
 
+// Outfit is a variable font: omitting `weight` serves one variable file
+// that covers every weight instead of separate static files.
 const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-outfit",
-  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -30,7 +32,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={outfit.variable}>
+    // The boot script adds classes to <html> before hydration.
+    <html lang="en" className={outfit.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Skip to content
