@@ -1,73 +1,19 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { profile } from "@/lib/content";
+import { FooterClock } from "./footer-clock";
+import { FooterMotion } from "./footer-motion";
 
-gsap.registerPlugin(ScrollTrigger);
+const FOOTER_ID = "contact";
+
+const socials = [
+  ["GitHub", profile.github],
+  ["LinkedIn", profile.linkedin],
+  ["Last.fm", profile.lastfm],
+];
 
 export function Footer() {
-  const ref = useRef<HTMLElement>(null);
-  const [time, setTime] = useState("—");
-
-  useEffect(() => {
-    const formatter = new Intl.DateTimeFormat("en-GB", {
-      timeZone: profile.timezone,
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    });
-
-    function update() {
-      setTime(formatter.format(new Date()));
-    }
-
-    update();
-    const timer = setInterval(update, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const footer = ref.current;
-    if (!footer) return;
-
-    const media = gsap.matchMedia();
-
-    media.add(
-      "(min-width: 901px) and (prefers-reduced-motion: no-preference)",
-      () => {
-        const context = gsap.context(() => {
-          gsap.from(".footer-content", {
-            y: 70,
-            ease: "none",
-            scrollTrigger: {
-              trigger: footer,
-              start: "top bottom",
-              end: "bottom bottom",
-              scrub: true,
-            },
-          });
-        }, footer);
-
-        return () => context.revert();
-      },
-    );
-
-    return () => media.revert();
-  }, []);
-
-  const socials = [
-    ["GitHub", profile.github],
-    ["LinkedIn", profile.linkedin],
-    ["Last.fm", profile.lastfm],
-  ];
-
   return (
-    <footer ref={ref} id="contact" className="footer">
+    <footer id={FOOTER_ID} className="footer">
       <div className="footer-content">
         <div className="footer-topline">
           <span className="eyebrow">HAVE SOMETHING IN MIND?</span>
@@ -123,7 +69,8 @@ export function Footer() {
           <div className="clock-block">
             <span className="footer-label">LOCAL TIME / BANGLADESH</span>
             <p>
-              <time>{time}</time> <span className="muted">GMT+6</span>
+              <FooterClock timeZone={profile.timezone} />{" "}
+              <span className="muted">GMT+6</span>
             </p>
           </div>
 
@@ -155,6 +102,8 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      <FooterMotion footerId={FOOTER_ID} />
     </footer>
   );
 }
