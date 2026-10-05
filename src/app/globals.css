@@ -139,10 +139,6 @@ button:focus-visible,
   color: var(--muted);
 }
 
-
-
-
-
 .round-button {
   position: relative;
   display: flex;
@@ -163,8 +159,6 @@ button:focus-visible,
   background: var(--accent);
   transition: background 220ms;
 }
-
-
 
 /* Navigation */
 
@@ -354,8 +348,6 @@ button:focus-visible,
   background: var(--hero);
 }
 
-
-
 .hero-portrait {
   position: absolute;
   top: 11%;
@@ -370,8 +362,6 @@ button:focus-visible,
   height: 100%;
 }
 
-
-
 .profile-photo {
   width: 100%;
   height: 100%;
@@ -380,8 +370,6 @@ button:focus-visible,
   mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
 }
-
-
 
 .location-badge {
   position: absolute;
@@ -398,10 +386,6 @@ button:focus-visible,
   font-weight: 400;
   line-height: 1.25;
 }
-
-
-
-
 
 .hero-introduction {
   position: absolute;
@@ -436,69 +420,9 @@ button:focus-visible,
   max-width: none;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* About */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Work */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.project-row:hover 
-
-.project-row:hover 
-
-
-
-
-
-
-
-
 
 /* Artwork */
 
@@ -561,7 +485,6 @@ button:focus-visible,
   color: rgb(255 255 255 / 55%);
   opacity: 0;
   transform-style: preserve-3d;
-  will-change: transform, opacity, filter;
 }
 
 .ct-content {
@@ -625,22 +548,6 @@ button:focus-visible,
 
 .ct-button.is-primary:hover {
   background: #5a6ff0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .contact-warp {
-    height: auto;
-  }
-
-  .ct-sticky {
-    position: relative;
-    padding-block: 140px;
-    height: auto;
-  }
-
-  .ct-words {
-    display: none;
-  }
 }
 
 /* Footer reveal */
@@ -979,21 +886,7 @@ button:focus-visible,
     margin-left: auto;
   }
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  .project-row:hover 
-
-  .footer {
+.footer {
     position: relative;
   }
 
@@ -1009,10 +902,6 @@ button:focus-visible,
     grid-template-columns: 1fr;
     gap: 30px;
   }
-}
-
-@media (hover: none) and (min-width: 901px) {
-  
 }
 
 @media (max-width: 600px) {
@@ -1273,8 +1162,9 @@ button:focus-visible,
   }
 
   .preloader,
-  .custom-cursor,
-  
+  .custom-cursor {
+    display: none;
+  }
 
   .footer {
     position: relative;
@@ -1286,6 +1176,20 @@ button:focus-visible,
     transform: none !important;
   }
 
+  /* Contact warp: collapse to static layout */
+  .contact-warp {
+    height: auto;
+  }
+
+  .ct-sticky {
+    position: relative;
+    padding-block: 140px;
+    height: auto;
+  }
+
+  .ct-words {
+    display: none;
+  }
 }
 
 /* =========================================

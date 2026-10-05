@@ -31,6 +31,13 @@ const ANCHORS = [
 
 const WORD_COUNT = 50;
 
+/** Pre-built spans — avoids recreating 50 elements on every render. */
+const wordSpans = Array.from({ length: WORD_COUNT }, (_, i) => (
+  <span className="ct-word" key={i}>
+    {WORDS[i % WORDS.length]}
+  </span>
+));
+
 export function ContactTransition() {
   const rootRef = useRef<HTMLElement>(null);
 
@@ -138,11 +145,7 @@ export function ContactTransition() {
     <section ref={rootRef} id="contact-intro" className="contact-warp">
       <div className="ct-sticky">
         <div className="ct-words" aria-hidden="true">
-          {Array.from({ length: WORD_COUNT }, (_, i) => (
-            <span className="ct-word" key={i}>
-              {WORDS[i % WORDS.length]}
-            </span>
-          ))}
+          {wordSpans}
         </div>
 
         <div className="ct-content">
