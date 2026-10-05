@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { gsap } from "@/lib/gsap";
 import { profile } from "@/lib/content";
 
@@ -149,21 +148,20 @@ export function ContactTransition() {
         </div>
 
         <div className="ct-content">
-          <span className="eyebrow">CONTACT</span>
-          <h2>Let&apos;s talk.</h2>
+          <h2>CONTACT</h2>
           <p>
-            Have a project, an idea, or just want to say hi? Drop me a line
-            and I&apos;ll get back to you as soon as I can.
+            Have a project in mind? Let&apos;s talk. Share a few details, and
+            I&apos;ll get back to you as soon as possible.
           </p>
           <div className="ct-actions">
             {profile.email && (
               <a className="ct-button is-primary" href={`mailto:${profile.email}`} data-magnetic>
-                Get in touch <ArrowUpRight size={18} />
+                BOOK A CALL
               </a>
             )}
-            {profile.linkedin && (
-              <a className="ct-button" href={profile.linkedin} target="_blank" rel="noreferrer" data-magnetic>
-                LinkedIn <ArrowUpRight size={18} />
+            {profile.email && (
+              <a className="ct-button is-dark" href={`mailto:${profile.email}?subject=Quote`} data-magnetic>
+                GET A QUOTE
               </a>
             )}
           </div>
