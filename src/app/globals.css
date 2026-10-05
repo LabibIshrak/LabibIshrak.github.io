@@ -1244,20 +1244,15 @@ button:focus-visible,
   overflow: visible;
   stroke: currentColor;
   stroke-width: 1.5;
-  animation: location-globe-spin 8s linear infinite;
 }
 
 .location-globe-frame {
   opacity: 1;
 }
 
-@keyframes location-globe-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Far side of the globe — faint so the spin reads as 3D depth */
+.location-globe-back {
+  opacity: 0.22;
 }
 
 /* =========================================
