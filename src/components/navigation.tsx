@@ -35,7 +35,7 @@ export function Navigation() {
       <nav className="desktop-navigation" aria-label="Main navigation">
         <TransitionLink href="/about" data-magnetic>About</TransitionLink>
         <a href="/#work" data-magnetic>Work</a>
-        <a href="#contact" data-magnetic>
+        <a href="#contact-intro" data-magnetic>
           Contact <ArrowUpRight size={15} />
         </a>
       </nav>
@@ -65,7 +65,7 @@ export function Navigation() {
           Work
           <ArrowUpRight />
         </a>
-        <a href="#contact" onClick={() => setOpen(false)}>
+        <a href="#contact-intro" onClick={() => setOpen(false)}>
           Contact
           <ArrowUpRight />
         </a>

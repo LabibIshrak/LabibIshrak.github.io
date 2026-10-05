@@ -2,6 +2,7 @@ import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { profile } from "@/lib/content";
 import { FooterClock } from "./footer-clock";
 import { FooterMotion } from "./footer-motion";
+import { ContactTransition } from "./contact-transition";
 
 const FOOTER_ID = "contact";
 
@@ -13,6 +14,8 @@ const socials = [
 
 export function Footer() {
   return (
+    <>
+    <ContactTransition />
     <footer id={FOOTER_ID} className="footer">
       <div className="footer-content">
         <div className="footer-topline">
@@ -105,5 +108,6 @@ export function Footer() {
 
       <FooterMotion footerId={FOOTER_ID} />
     </footer>
+    </>
   );
 }
