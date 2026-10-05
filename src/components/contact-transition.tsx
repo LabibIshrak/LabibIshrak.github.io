@@ -1,26 +1,35 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { gsap } from "@/lib/gsap";
+import { profile } from "@/lib/content";
 
-/** Words cycled in the centre of the stage. Bangla sits in the middle and closes the loop. */
-const WORDS: { text: string; lang: string }[] = [
-  { text: "Contact", lang: "en" },
-  { text: "Contacto", lang: "es" },
-  { text: "যোগাযোগ", lang: "bn" },
-  { text: "Kontakt", lang: "de" },
-  { text: "連絡", lang: "ja" },
-  { text: "Contatto", lang: "it" },
-  { text: "Связь", lang: "ru" },
-  { text: "কথা বলি", lang: "bn" },
+/** "Contact" in many languages; Bangla is just one voice among them. */
+const WORDS = [
+  "CONTACT",
+  "CONTACTO",
+  "CONTACTEZ",
+  "CONTATTO",
+  "KONTAKT",
+  "CONTATO",
+  "КОНТАКТ",
+  "お問い合わせ",
+  "联系",
+  "연락",
+  "যোগাযোগ",
+  "ΕΠΑΦΗ",
 ];
 
-/** Greetings for the drifting marquee rows. */
-const ROWS = [
-  ["Hello", "হ্যালো", "Hola", "Bonjour", "こんにちは", "Ciao", "নমস্কার", "Olá"],
-  ["Let's talk", "চলো কথা বলি", "Hablemos", "Parlons", "話そう", "Parliamo", "Reden wir"],
-  ["Say hi", "শুভেচ্ছা", "Salut", "Hallo", "안녕", "Привет", "Ahoj", "স্বাগতম"],
+/** Radial anchor points (vw / vh) the words drift toward as they fly past. */
+const ANCHORS = [
+  { x: -38, y: -38 }, { x: -14, y: -40 }, { x: 14, y: -40 }, { x: 38, y: -38 },
+  { x: -42, y: -14 }, { x: -18, y: -18 }, { x: 18, y: -18 }, { x: 42, y: -14 },
+  { x: -42, y: 14 }, { x: -18, y: 18 }, { x: 18, y: 18 }, { x: 42, y: 14 },
+  { x: -38, y: 38 }, { x: -14, y: 40 }, { x: 14, y: 40 }, { x: 38, y: 38 },
 ];
+
+const WORD_COUNT = 50;
 
 export function ContactTransition() {
   const rootRef = useRef<HTMLElement>(null);
@@ -29,72 +38,94 @@ export function ContactTransition() {
     const root = rootRef.current;
     if (!root) return;
 
+    const content = root.querySelector<HTMLElement>(".ct-content");
+    const words = gsap.utils.toArray<HTMLElement>(".ct-word", root);
     const media = gsap.matchMedia();
 
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const ctx = gsap.context(() => {
-        const words = gsap.utils.toArray<HTMLElement>(".ct-word");
-        const rows = gsap.utils.toArray<HTMLElement>(".ct-row-track");
+        // Content sharpens into focus as the section arrives.
+        gsap.fromTo(
+          content,
+          { autoAlpha: 0, yPercent: 25, scale: 0.96, filter: "blur(8px)" },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: root,
+              start: "top 60%",
+              end: "top 25%",
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          },
+        );
 
-        gsap.set(words, { yPercent: 110 });
-        gsap.set(words[0], { yPercent: 0 });
-
+        // Warp tunnel: words rush from deep space past the camera.
         const tl = gsap.timeline({
-          defaults: { ease: "power3.inOut" },
           scrollTrigger: {
             trigger: root,
             start: "top top",
-            end: () => `+=${window.innerHeight * 3.2}`,
-            pin: ".ct-stage",
-            scrub: 0.8,
-            anticipatePin: 1,
+            end: "bottom bottom",
+            scrub: 1,
             invalidateOnRefresh: true,
           },
         });
 
-        // Marquee rows drift in alternating directions for the whole pin.
-        rows.forEach((row, i) => {
-          tl.fromTo(
-            row,
-            { xPercent: i % 2 ? -45 : 0 },
-            { xPercent: i % 2 ? 0 : -45, ease: "none", duration: WORDS.length },
-            0,
+        const r = gsap.utils.random;
+
+        words.forEach((word, i) => {
+          const a = ANCHORS[i % ANCHORS.length];
+          const wave = 0.12 * Math.floor(i / ANCHORS.length);
+          const at = r(0, 0.52) + wave;
+          const inDur = r(0.12, 0.18);
+          const outDur = r(0.12, 0.18);
+          const midX = a.x + r(-4, 4);
+          const midY = a.y + r(-4, 4);
+          const scale = r(0.7, 1.3);
+
+          gsap.set(word, {
+            xPercent: -50,
+            yPercent: -50,
+            x: `${a.x * r(0.08, 0.22)}vw`,
+            y: `${a.y * r(0.08, 0.22)}vh`,
+            z: r(-1600, -1100),
+            scale: 0.35 * scale,
+            autoAlpha: 0,
+            filter: "blur(10px)",
+          });
+
+          tl.to(
+            word,
+            {
+              x: `${midX}vw`,
+              y: `${midY}vh`,
+              z: 0,
+              scale,
+              autoAlpha: r(0.25, 0.62),
+              filter: "blur(0px)",
+              duration: inDur,
+              ease: "power1.inOut",
+            },
+            at,
+          ).to(
+            word,
+            {
+              x: `${midX + r(-3, 3)}vw`,
+              y: `${midY + r(-3, 3)}vh`,
+              z: r(800, 1200),
+              scale: scale * r(1.3, 1.65),
+              autoAlpha: 0,
+              filter: "blur(8px)",
+              duration: outDur,
+              ease: "power1.in",
+            },
+            at + inDur,
           );
         });
-
-        // Centre word: each language rolls up through a mask.
-        words.forEach((word, i) => {
-          if (i === 0) return;
-          const at = i - 0.5;
-          tl.to(words[i - 1], { yPercent: -110, duration: 0.6 }, at);
-          tl.to(word, { yPercent: 0, duration: 0.6 }, at);
-        });
-
-        tl.fromTo(
-          ".ct-counter-bar",
-          { scaleX: 0 },
-          { scaleX: 1, ease: "none", duration: WORDS.length },
-          0,
-        );
-
-        // Finale: accent circle swallows the stage, inviting the footer.
-        tl.fromTo(
-          ".ct-orb",
-          { scale: 0 },
-          { scale: 1, duration: 1.4, ease: "power2.in" },
-          WORDS.length - 0.6,
-        );
-        tl.to(
-          ".ct-rows, .ct-center, .ct-meta",
-          { opacity: 0, duration: 0.6 },
-          WORDS.length - 0.2,
-        );
-        tl.fromTo(
-          ".ct-finale",
-          { opacity: 0, yPercent: 30 },
-          { opacity: 1, yPercent: 0, duration: 0.7, ease: "power3.out" },
-          WORDS.length + 0.4,
-        );
       }, root);
 
       return () => ctx.revert();
@@ -104,47 +135,35 @@ export function ContactTransition() {
   }, []);
 
   return (
-    <section ref={rootRef} id="contact-intro" className="contact-transition" aria-label="Contact intro">
-      <div className="ct-stage">
-        <div className="ct-rows" aria-hidden="true">
-          {ROWS.map((row, i) => (
-            <div className="ct-row" key={i}>
-              <div className="ct-row-track">
-                {[...row, ...row, ...row].map((w, j) => (
-                  <span key={j}>
-                    {w}
-                    <i className="ct-dot" />
-                  </span>
-                ))}
-              </div>
-            </div>
+    <section ref={rootRef} id="contact-intro" className="contact-warp">
+      <div className="ct-sticky">
+        <div className="ct-words" aria-hidden="true">
+          {Array.from({ length: WORD_COUNT }, (_, i) => (
+            <span className="ct-word" key={i}>
+              {WORDS[i % WORDS.length]}
+            </span>
           ))}
         </div>
 
-        <div className="ct-center">
-          <span className="eyebrow">GET IN TOUCH — যোগাযোগ</span>
-          <div className="ct-mask">
-            {WORDS.map((w) => (
-              <span className="ct-word" lang={w.lang} key={w.text}>
-                {w.text}
-              </span>
-            ))}
+        <div className="ct-content">
+          <span className="eyebrow">CONTACT</span>
+          <h2>Let&apos;s talk.</h2>
+          <p>
+            Have a project, an idea, or just want to say hi? Drop me a line
+            and I&apos;ll get back to you as soon as I can.
+          </p>
+          <div className="ct-actions">
+            {profile.email && (
+              <a className="ct-button is-primary" href={`mailto:${profile.email}`} data-magnetic>
+                Get in touch <ArrowUpRight size={18} />
+              </a>
+            )}
+            {profile.linkedin && (
+              <a className="ct-button" href={profile.linkedin} target="_blank" rel="noreferrer" data-magnetic>
+                LinkedIn <ArrowUpRight size={18} />
+              </a>
+            )}
           </div>
-        </div>
-
-        <div className="ct-meta" aria-hidden="true">
-          <span className="eyebrow">SCROLL</span>
-          <div className="ct-counter">
-            <div className="ct-counter-bar" />
-          </div>
-          <span className="eyebrow">MANY LANGUAGES, ONE INBOX</span>
-        </div>
-
-        <div className="ct-orb" aria-hidden="true" />
-
-        <div className="ct-finale" aria-hidden="true">
-          <span>Let&apos;s talk</span>
-          <span lang="bn">চলো কথা বলি ↓</span>
         </div>
       </div>
     </section>
