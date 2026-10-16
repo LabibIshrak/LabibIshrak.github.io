@@ -588,8 +588,840 @@
 }
 
 /* =========================================
-   ABOUT PAGE (dedicated route) — LIGHT THEME
+   ABOUT PAGE — PREMIUM EDITORIAL (alux)
+   Dennis Snellenberg-inspired aesthetic
+   White · Black · Restrained · Typographic
    ========================================= */
+
+/* ── Base shell ── */
+
+.about-lux-main {
+  background: #f5f4f0;
+  color: #111;
+  font-family: var(--sans);
+  overflow-x: hidden;
+}
+
+.about-lux-main .navigation {
+  position: relative;
+  background: #f5f4f0;
+}
+
+/* Nav text dark on light bg */
+.about-lux-main .navigation a,
+.about-lux-main .wordmark,
+.about-lux-main .wordmark-symbol,
+.about-lux-main .mobile-menu-trigger {
+  color: #111;
+}
+
+.about-lux-main .desktop-navigation a::after {
+  background: #111;
+}
+
+.about-lux-main .mobile-menu:not([hidden]) {
+  background: #f5f4f0;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 8%);
+}
+
+.about-lux-main .mobile-menu a {
+  color: #111;
+  border-bottom-color: rgb(0 0 0 / 8%);
+}
+
+/* ── Back link ── */
+
+.alux-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #888;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  transition: color 200ms;
+}
+
+.alux-back:hover { color: #111; }
+
+/* ── Global eyebrow ── */
+
+.alux-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-hero {
+  padding: clamp(70px, 10vw, 140px) var(--gutter) clamp(50px, 7vw, 100px);
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+}
+
+.alux-hero-inner {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(40px, 5vw, 70px);
+  max-width: 1400px;
+  margin-inline: auto;
+}
+
+/* Big display heading */
+.alux-h1 {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: clamp(72px, 13vw, 210px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  color: #111;
+  gap: 0;
+}
+
+.alux-h1-line {
+  display: block;
+  overflow: hidden;
+}
+
+.alux-h1-italic {
+  font-style: italic;
+  color: #555;
+}
+
+/* Hero meta bar */
+.alux-hero-meta {
+  display: flex;
+  gap: clamp(30px, 5vw, 80px);
+  flex-wrap: wrap;
+  padding-top: clamp(30px, 4vw, 50px);
+  border-top: 1px solid rgb(0 0 0 / 10%);
+}
+
+.alux-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alux-meta-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.alux-meta-val {
+  font-size: clamp(14px, 1.2vw, 17px);
+  color: #111;
+  letter-spacing: -0.01em;
+}
+
+.alux-available {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2a7a4b;
+}
+
+.alux-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2a7a4b;
+  flex-shrink: 0;
+  animation: alux-pulse 2s ease-in-out infinite;
+}
+
+@keyframes alux-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   INTRO + PHOTO
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+}
+
+.alux-intro-photo {
+  position: relative;
+  overflow: hidden;
+  background: #ddd;
+  min-height: 500px;
+}
+
+.alux-intro-img {
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.alux-intro-photo:hover .alux-intro-img {
+  transform: scale(1.04);
+}
+
+.alux-photo-tag {
+  position: absolute;
+  bottom: 18px;
+  left: 22px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgb(255 255 255 / 75%);
+  text-transform: uppercase;
+}
+
+.alux-intro-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(28px, 3vw, 42px);
+  padding: clamp(50px, 7vw, 110px) clamp(35px, 5vw, 85px);
+}
+
+.alux-statement {
+  font-size: clamp(22px, 2.8vw, 40px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+  color: #111;
+}
+
+.alux-bio {
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.8;
+  color: #555;
+  max-width: 520px;
+}
+
+.alux-bio strong {
+  color: #111;
+  font-weight: 500;
+}
+
+.alux-email-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border: 1px solid rgb(0 0 0 / 15%);
+  border-radius: 99px;
+  font-size: 14px;
+  color: #111;
+  width: fit-content;
+  transition: background 250ms, border-color 250ms, color 250ms;
+}
+
+.alux-email-cta:hover {
+  background: #111;
+  border-color: #111;
+  color: #f5f4f0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED SECTION LAYOUT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-section {
+  padding: clamp(60px, 8vw, 120px) var(--gutter);
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+  max-width: 1400px;
+  margin-inline: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Section header: eyebrow left + count right */
+.alux-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(40px, 5vw, 70px);
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgb(0 0 0 / 10%);
+}
+
+.alux-section-count {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #bbb;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EXPERIENCE TIMELINE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.alux-tl-row {
+  display: grid;
+  grid-template-columns: 180px 32px 1fr;
+  gap: 0 clamp(20px, 3vw, 44px);
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+
+.alux-tl-row:last-child {
+  padding-bottom: 0;
+}
+
+/* Left meta column */
+.alux-tl-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 4px;
+  text-align: right;
+}
+
+.alux-tl-period {
+  font-size: 13px;
+  color: #111;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.alux-tl-location {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Track: dot + line */
+.alux-tl-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6px;
+}
+
+.alux-tl-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #111;
+  flex-shrink: 0;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+              background 300ms;
+}
+
+.alux-tl-row:hover .alux-tl-dot {
+  transform: scale(1.5);
+  background: var(--accent);
+}
+
+.alux-tl-line {
+  display: block;
+  width: 1px;
+  flex: 1;
+  margin-top: 8px;
+  background: rgb(0 0 0 / 12%);
+}
+
+/* Body */
+.alux-tl-body {
+  padding-bottom: clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+}
+
+.alux-tl-row:last-child .alux-tl-body {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.alux-tl-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.alux-tl-title {
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #111;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.alux-tl-badge {
+  flex-shrink: 0;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #777;
+  padding: 5px 12px;
+  border: 1px solid rgb(0 0 0 / 12%);
+  border-radius: 99px;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+.alux-tl-company {
+  font-size: clamp(14px, 1.1vw, 17px);
+  color: #555;
+  margin: 8px 0 16px;
+  font-weight: 400;
+}
+
+.alux-tl-desc {
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.75;
+  color: #666;
+  max-width: 680px;
+}
+
+.alux-tl-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alux-tl-tags li {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  color: #555;
+  transition: background 200ms, color 200ms, border-color 200ms;
+}
+
+.alux-tl-tags li:hover {
+  background: #111;
+  color: #f5f4f0;
+  border-color: #111;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACHIEVEMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-awards {
+  display: flex;
+  flex-direction: column;
+}
+
+.alux-award-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: clamp(20px, 3vw, 50px);
+  padding: clamp(28px, 3vw, 42px) 0;
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+  transition: background 250ms;
+  border-radius: 8px;
+}
+
+.alux-award-row:first-child {
+  border-top: 1px solid rgb(0 0 0 / 8%);
+}
+
+.alux-award-row:hover {
+  background: rgb(0 0 0 / 2.5%);
+  padding-inline: 14px;
+  margin-inline: -14px;
+}
+
+.alux-award-rank {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2px;
+  padding-top: 4px;
+}
+
+.alux-award-num {
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: #ddd;
+  transition: color 250ms;
+}
+
+.alux-award-row:hover .alux-award-num {
+  color: var(--accent);
+}
+
+.alux-award-scope {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.alux-award-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.alux-award-title {
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #111;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.alux-award-year {
+  font-size: 12px;
+  color: #aaa;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.alux-award-desc {
+  margin-top: 10px;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.7;
+  color: #666;
+  max-width: 620px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   EDUCATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-edu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.alux-edu-row {
+  display: flex;
+  gap: clamp(20px, 3vw, 40px);
+  padding: clamp(28px, 3vw, 48px) 0;
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+  align-items: flex-start;
+  transition: padding 250ms;
+}
+
+.alux-edu-row:first-child {
+  border-top: 1px solid rgb(0 0 0 / 8%);
+}
+
+.alux-edu-logo-wrap {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 8%);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 6%);
+}
+
+.alux-edu-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.alux-edu-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.alux-edu-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 40px);
+  flex-wrap: wrap;
+}
+
+.alux-edu-degree {
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: #111;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.alux-edu-field {
+  font-weight: 400;
+  color: #555;
+}
+
+.alux-edu-inst {
+  font-size: clamp(13px, 1vw, 15px);
+  color: #888;
+  margin: 6px 0 0;
+  letter-spacing: -0.01em;
+}
+
+.alux-edu-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.alux-edu-period {
+  font-size: 13px;
+  color: #111;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.alux-edu-loc {
+  font-size: 12px;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TECH STACKS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgb(0 0 0 / 8%);
+  border-left: 1px solid rgb(0 0 0 / 8%);
+}
+
+.alux-tech-col {
+  padding: clamp(22px, 2.5vw, 36px);
+  border-right: 1px solid rgb(0 0 0 / 8%);
+  border-bottom: 1px solid rgb(0 0 0 / 8%);
+}
+
+.alux-tech-cat {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+  margin: 0 0 16px;
+}
+
+.alux-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.alux-tech-list li {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  color: #444;
+  letter-spacing: -0.01em;
+  transition: background 220ms, color 220ms, border-color 220ms, transform 220ms;
+}
+
+.alux-tech-list li:hover {
+  background: #111;
+  color: #f5f4f0;
+  border-color: #111;
+  transform: translateY(-2px);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CLOSING CTA
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-cta {
+  padding: clamp(80px, 12vw, 180px) var(--gutter);
+  background: #111;
+  color: #f5f4f0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+  max-width: 100%;
+}
+
+.alux-cta-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.alux-cta-heading {
+  font-size: clamp(52px, 9vw, 145px);
+  font-weight: 500;
+  line-height: 0.97;
+  letter-spacing: -0.055em;
+  color: #f5f4f0;
+  margin: 0;
+  max-width: 900px;
+}
+
+.alux-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 99px;
+  font-size: 15px;
+  color: #f5f4f0;
+  width: fit-content;
+  transition: background 250ms, border-color 250ms;
+}
+
+.alux-cta-link:hover {
+  background: #f5f4f0;
+  color: #111;
+  border-color: #f5f4f0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO TEXT ANIMATION PREP
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.alux-h1-line-inner {
+  display: block;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE — TABLET (≤ 1100px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (max-width: 1100px) {
+  .alux-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .alux-intro-photo {
+    min-height: 60vw;
+    max-height: 580px;
+  }
+
+  .alux-tl-row {
+    grid-template-columns: 140px 28px 1fr;
+    gap: 0 20px;
+  }
+
+  .alux-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .alux-award-row {
+    grid-template-columns: 110px 1fr;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE — MOBILE (≤ 700px)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (max-width: 700px) {
+  .alux-hero {
+    padding-top: 90px;
+  }
+
+  .alux-hero-meta {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .alux-intro-photo {
+    min-height: 75vw;
+  }
+
+  .alux-intro-content {
+    padding: 40px var(--gutter);
+  }
+
+  .alux-tl-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 12px 0;
+  }
+
+  .alux-tl-left {
+    text-align: left;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .alux-tl-track {
+    display: none;
+  }
+
+  .alux-tl-body {
+    padding-bottom: 32px;
+  }
+
+  .alux-award-row {
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+  }
+
+  .alux-award-num {
+    font-size: 42px;
+  }
+
+  .alux-edu-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .alux-edu-right {
+    align-items: flex-start;
+  }
+
+  .alux-tech-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .alux-cta-heading {
+    font-size: clamp(44px, 11vw, 72px);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   REDUCED MOTION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@media (prefers-reduced-motion: reduce) {
+  .alux-dot,
+  .alux-tl-dot,
+  .alux-tl-line,
+  .alux-award-row,
+  .alux-intro-img,
+  .alux-tech-list li,
+  .alux-tl-tags li,
+  .alux-email-cta,
+  .alux-cta-link {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
 .about-page-main .navigation {
   position: relative;

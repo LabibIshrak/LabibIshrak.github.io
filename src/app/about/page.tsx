@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { TransitionLink } from "@/components/runtime";
@@ -10,352 +10,316 @@ import { profile } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Hasin Ishrak Labib — CSE undergraduate at PUST, Co-founder & CEO of Vantaloc, full-stack developer, and builder based in Bangladesh.",
+    "Hasin Ishrak Labib — Co-founder & CEO of Vantaloc, CSE undergraduate at PUST, full-stack developer, and builder based in Bangladesh.",
 };
 
-const leadText =
-  "I'm Hasin Ishrak Labib — a Computer Science & Engineering undergraduate, entrepreneur, and builder based in Bangladesh. I co-founded Vantaloc, a SaaS company delivering websites, AI agents, software, and mobile apps to clients worldwide.";
+const statement =
+  "Building real products. Shipping software that works. Leading teams that move fast. Based in Bangladesh.";
 
-/* ── Experience timeline data ── */
+/* ─── Data ─────────────────────────────────────────────────────── */
 
-type ExperienceEntry = {
-  title: string;
-  company: string;
-  type: string;
-  period: string;
-  location: string;
-  description: string;
-  skills?: string[];
-};
-
-const experiences: ExperienceEntry[] = [
+const experiences = [
   {
     title: "Co-founder & CEO",
     company: "Vantaloc",
-    type: "Full-time",
+    type: "Full-time · SaaS",
     period: "2025 — Present",
     location: "Bangladesh",
     description:
-      "Co-founded and lead Vantaloc, a SaaS company building websites, AI agents, software solutions, and Android applications for clients. Overseeing product strategy, technical architecture, and client delivery end-to-end.",
-    skills: ["SaaS", "AI Agents", "Next.js", "Flutter", "Product Strategy", "Leadership"],
+      "Co-founded and lead Vantaloc — a SaaS company building websites, AI agents, custom software, and Android applications for clients. End-to-end ownership: strategy, architecture, hiring, delivery.",
+    skills: ["SaaS", "AI Agents", "Next.js", "Flutter", "Android", "Leadership"],
   },
   {
     title: "Product Lead",
     company: "Mezai Tech",
-    type: "Part-time",
+    type: "Part-time · Digital Services",
     period: "2025 — Present",
     location: "Bangladesh",
     description:
-      "Leading product development at Mezai Tech, a digital service provider. Defining product roadmaps, coordinating cross-functional teams, and ensuring timely delivery of digital solutions for diverse clients.",
-    skills: ["Product Management", "Digital Services", "Team Leadership", "Agile"],
+      "Driving product at Mezai Tech, a digital service provider. Setting roadmaps, leading cross-functional squads, and shipping digital solutions that clients actually use.",
+    skills: ["Product Strategy", "Team Leadership", "Agile", "Digital Services"],
   },
 ];
 
-/* ── Achievements data ── */
-
-type Achievement = {
-  title: string;
-  event: string;
-  year: string;
-  description: string;
-};
-
-const achievements: Achievement[] = [
+const achievements = [
   {
-    title: "4th Place Nationally",
-    event: "July Hackathon 2026",
+    rank: "4th",
+    scope: "Nationally",
+    title: "July Hackathon 2026",
     year: "2026",
     description:
-      "Secured 4th position nationally in the July Hackathon 2026, competing against teams from across Bangladesh.",
+      "Secured 4th place nationally, competing against teams from top universities across Bangladesh.",
   },
   {
-    title: "Finalist",
-    event: "PSTU Hackathon Final 2026",
+    rank: "Finalist",
+    scope: "",
+    title: "PSTU Hackathon Final",
     year: "2026",
     description:
-      "Reached the final round of the PSTU Hackathon 2026, building and presenting a full solution under competitive pressure.",
+      "Reached the grand final of PSTU Hackathon 2026 — built and presented a full working product under pressure.",
   },
   {
-    title: "Regional Championship Winner",
-    event: "Creative Talent Hunt",
-    year: "2018 — 2021",
+    rank: "3×",
+    scope: "Champion",
+    title: "Creative Talent Hunt",
+    year: "2018 – 2021",
     description:
-      "Former Regional Championship Winner of Creative Talent Hunt. Held the title for three consecutive years from 2018 to 2021.",
+      "Regional Championship Winner for three consecutive years. Held the title from 2018 to 2021.",
   },
 ];
 
-/* ── Education data ── */
-
-type Education = {
-  degree: string;
-  institution: string;
-  period: string;
-  location: string;
-  description: string;
-  logo?: string;
-  highlights?: string[];
-};
-
-const education: Education[] = [
+const education = [
   {
-    degree: "B.Sc. Engineering in Computer Science & Engineering",
-    institution: "Pabna University of Science and Technology (PUST)",
+    degree: "B.Sc. Engineering",
+    field: "Computer Science & Engineering",
+    institution: "Pabna University of Science and Technology",
+    short: "PUST",
     period: "2024 — Present",
     location: "Pabna, Bangladesh",
     logo: "/pust-logo.png",
-    description:
-      "Pursuing a comprehensive engineering degree covering data structures, algorithms, software engineering, database systems, and artificial intelligence.",
-    highlights: [
-      "Data Structures & Algorithms",
-      "Object-Oriented Programming",
-      "Database Systems",
-      "Artificial Intelligence",
-      "Software Engineering",
-    ],
   },
   {
-    degree: "Higher Secondary Certificate (HSC)",
+    degree: "Higher Secondary Certificate",
+    field: "Science Group",
     institution: "Rajshahi College",
+    short: "RC",
     period: "2021 — 2023",
     location: "Rajshahi, Bangladesh",
     logo: "/rajshahi-college-logo.png",
-    description:
-      "Completed higher secondary education in the Science group from one of the most prestigious colleges in Bangladesh.",
-    highlights: ["Science Group", "Mathematics", "Physics"],
   },
 ];
 
-/* ── Tech stack data ── */
-
-type TechCategory = {
-  category: string;
-  items: string[];
-};
-
-const techStacks: TechCategory[] = [
-  {
-    category: "Languages",
-    items: ["C++", "Python", "TypeScript", "JavaScript", "Dart", "Java", "SQL"],
-  },
-  {
-    category: "Frontend",
-    items: ["React", "Next.js", "HTML5", "CSS3", "GSAP", "Framer Motion"],
-  },
-  {
-    category: "Mobile",
-    items: ["Flutter", "Dart", "Firebase", "Android SDK"],
-  },
-  {
-    category: "Backend",
-    items: ["Node.js", "Express", "REST APIs", "PostgreSQL", "MongoDB"],
-  },
-  {
-    category: "AI / ML",
-    items: ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy"],
-  },
-  {
-    category: "Tools & DevOps",
-    items: ["Git", "GitHub", "VS Code", "Docker", "Linux", "Figma"],
-  },
+const techStacks = [
+  { category: "Languages",      items: ["C++", "Python", "TypeScript", "JavaScript", "Dart", "Java", "SQL"] },
+  { category: "Frontend",       items: ["React", "Next.js", "HTML5", "CSS3", "GSAP", "Framer Motion"] },
+  { category: "Mobile",         items: ["Flutter", "Dart", "Firebase", "Android SDK"] },
+  { category: "Backend",        items: ["Node.js", "Express", "REST APIs", "PostgreSQL", "MongoDB"] },
+  { category: "AI / ML",        items: ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy"] },
+  { category: "Tools & DevOps", items: ["Git", "GitHub", "Docker", "Linux", "Figma", "VS Code"] },
 ];
+
+/* ─── Page ──────────────────────────────────────────────────────── */
 
 export default function AboutPage() {
   return (
     <div className="page-shell">
-      <main id="main" className="main-curtain about-page-main about-page-light">
+      <main id="main" className="main-curtain about-lux-main">
         <Navigation />
 
         <AboutPageAnimations>
-          <article className="about-page section-padding">
-            <TransitionLink href="/" className="back-link about-back-link">
-              <ArrowLeft size={18} />
-              Back to home
-            </TransitionLink>
 
-            <header className="about-page-header">
-              <span className="eyebrow about-light-eyebrow">WHO I AM</span>
+          {/* ── HERO ──────────────────────────────────── */}
+          <section className="alux-hero">
+            <div className="alux-hero-inner">
+              <TransitionLink href="/" className="alux-back">
+                <ArrowLeft size={16} />
+                <span>Home</span>
+              </TransitionLink>
 
-              <h1 data-page-heading tabIndex={-1}>
-                Labib — developer,
-                <br />
-                entrepreneur, builder.
-              </h1>
-            </header>
-
-            {/* ── Intro with photo ── */}
-            <div className="about-page-intro about-intro-split">
-              <div className="about-intro-text">
-                <p className="about-page-lead">
-                  <SplitWords text={leadText} />
-                </p>
+              <div className="alux-hero-text">
+                <p className="alux-eyebrow">About</p>
+                <h1 className="alux-h1" data-page-heading tabIndex={-1}>
+                  <span className="alux-h1-line">Hasin</span>
+                  <span className="alux-h1-line alux-h1-italic">Ishrak</span>
+                  <span className="alux-h1-line">Labib</span>
+                </h1>
               </div>
-              <div className="about-portrait-wrap">
-                <div className="about-portrait">
-                  <Image
-                    src="/portrait-placeholder.png"
-                    alt="Hasin Ishrak Labib"
-                    width={420}
-                    height={520}
-                    className="about-portrait-img"
-                    priority
-                  />
+
+              <div className="alux-hero-meta">
+                <div className="alux-meta-col">
+                  <span className="alux-meta-label">Role</span>
+                  <span className="alux-meta-val">Founder · Developer</span>
                 </div>
-                <span className="about-portrait-caption">
-                  Hasin Ishrak Labib — Bangladesh
-                </span>
+                <div className="alux-meta-col">
+                  <span className="alux-meta-label">Based in</span>
+                  <span className="alux-meta-val">Bangladesh</span>
+                </div>
+                <div className="alux-meta-col">
+                  <span className="alux-meta-label">Status</span>
+                  <span className="alux-meta-val alux-available">
+                    <span className="alux-dot" />
+                    Available for work
+                  </span>
+                </div>
               </div>
             </div>
+          </section>
 
-            {/* ── Experience Timeline ── */}
-            <section className="about-section" id="experience">
-              <div className="about-section-header">
-                <span className="eyebrow about-light-eyebrow">EXPERIENCE</span>
-                <div className="about-section-rule" />
-              </div>
+          {/* ── INTRO + PHOTO ─────────────────────────── */}
+          <section className="alux-intro">
+            <div className="alux-intro-photo">
+              <Image
+                src="/portrait-placeholder.png"
+                alt="Hasin Ishrak Labib"
+                fill
+                sizes="(max-width: 900px) 100vw, 45vw"
+                className="alux-intro-img"
+                priority
+              />
+              <span className="alux-photo-tag">Labib, 2025</span>
+            </div>
 
-              <div className="experience-timeline">
-                {experiences.map((exp, i) => (
-                  <div className="timeline-entry" key={i}>
-                    <div className="timeline-track">
-                      <div className="timeline-dot" />
-                      {i < experiences.length - 1 && (
-                        <div className="timeline-line" />
-                      )}
-                    </div>
-                    <div className="timeline-content">
-                      <div className="timeline-top">
-                        <div>
-                          <h3 className="timeline-title">{exp.title}</h3>
-                          <p className="timeline-company">
-                            {exp.company}
-                            <span className="timeline-type"> · {exp.type}</span>
-                          </p>
-                        </div>
-                        <span className="timeline-period">{exp.period}</span>
-                      </div>
-                      <p className="timeline-location">{exp.location}</p>
-                      <p className="timeline-description">{exp.description}</p>
-                      {exp.skills && (
-                        <ul className="timeline-skills">
-                          {exp.skills.map((skill, si) => (
-                            <li key={si}>{skill}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+            <div className="alux-intro-content">
+              <p className="alux-statement">
+                <SplitWords text={statement} />
+              </p>
+
+              <p className="alux-bio">
+                Second-year Computer Science & Engineering undergraduate at PUST.
+                Co-founder and CEO of <strong>Vantaloc</strong> — a SaaS company
+                delivering websites, AI agents, software, and Android apps to
+                clients. Product Lead at <strong>Mezai Tech</strong>. Competitive
+                programmer. Former three-time regional champion.
+              </p>
+
+              {profile.email && (
+                <a className="alux-email-cta" href={`mailto:${profile.email}`}>
+                  <span>{profile.email}</span>
+                  <ArrowUpRight size={16} />
+                </a>
+              )}
+            </div>
+          </section>
+
+          {/* ── EXPERIENCE ────────────────────────────── */}
+          <section className="alux-section" id="experience">
+            <header className="alux-section-head">
+              <span className="alux-eyebrow">Experience</span>
+              <span className="alux-section-count">{String(experiences.length).padStart(2, "0")}</span>
+            </header>
+
+            <div className="alux-timeline">
+              {experiences.map((exp, i) => (
+                <div className="alux-tl-row" key={i}>
+                  <div className="alux-tl-left">
+                    <span className="alux-tl-period">{exp.period}</span>
+                    <span className="alux-tl-location">{exp.location}</span>
                   </div>
-                ))}
-              </div>
-            </section>
 
-            {/* ── Achievements ── */}
-            <section className="about-section" id="achievements">
-              <div className="about-section-header">
-                <span className="eyebrow about-light-eyebrow">ACHIEVEMENTS</span>
-                <div className="about-section-rule" />
-              </div>
-
-              <div className="achievements-grid">
-                {achievements.map((ach, i) => (
-                  <div className="achievement-card" key={i}>
-                    <div className="achievement-index">
-                      {String(i + 1).padStart(2, "0")}
-                    </div>
-                    <div className="achievement-body">
-                      <h3 className="achievement-title">{ach.title}</h3>
-                      <p className="achievement-event">
-                        {ach.event}
-                        <span className="achievement-year"> — {ach.year}</span>
-                      </p>
-                      <p className="achievement-desc">{ach.description}</p>
-                    </div>
+                  <div className="alux-tl-track">
+                    <span className="alux-tl-dot" />
+                    {i < experiences.length - 1 && <span className="alux-tl-line" />}
                   </div>
-                ))}
-              </div>
-            </section>
 
-            {/* ── Education ── */}
-            <section className="about-section" id="education">
-              <div className="about-section-header">
-                <span className="eyebrow about-light-eyebrow">EDUCATION</span>
-                <div className="about-section-rule" />
-              </div>
-
-              <div className="education-list">
-                {education.map((edu, i) => (
-                  <div className="education-entry" key={i}>
-                    <div className="education-left">
-                      {edu.logo && (
-                        <div className="education-logo-wrap">
-                          <Image
-                            src={edu.logo}
-                            alt={edu.institution}
-                            width={52}
-                            height={52}
-                            className="education-logo"
-                          />
-                        </div>
-                      )}
-                      <div className="education-meta">
-                        <span className="education-period">{edu.period}</span>
-                        <span className="education-location">{edu.location}</span>
-                      </div>
+                  <div className="alux-tl-body">
+                    <div className="alux-tl-top">
+                      <h3 className="alux-tl-title">{exp.title}</h3>
+                      <span className="alux-tl-badge">{exp.type}</span>
                     </div>
-                    <div className="education-right">
-                      <h3 className="education-degree">{edu.degree}</h3>
-                      <p className="education-institution">{edu.institution}</p>
-                      <p className="education-description">{edu.description}</p>
-                      {edu.highlights && (
-                        <ul className="education-highlights">
-                          {edu.highlights.map((h, hi) => (
-                            <li key={hi}>{h}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* ── Tech Stacks ── */}
-            <section className="about-section" id="tech-stacks">
-              <div className="about-section-header">
-                <span className="eyebrow about-light-eyebrow">TECH STACKS</span>
-                <div className="about-section-rule" />
-              </div>
-
-              <div className="tech-grid">
-                {techStacks.map((cat, i) => (
-                  <div className="tech-category" key={i}>
-                    <h4 className="tech-category-label">{cat.category}</h4>
-                    <ul className="tech-items">
-                      {cat.items.map((item, ti) => (
-                        <li key={ti}>{item}</li>
+                    <p className="alux-tl-company">{exp.company}</p>
+                    <p className="alux-tl-desc">{exp.description}</p>
+                    <ul className="alux-tl-tags">
+                      {exp.skills.map((s, si) => (
+                        <li key={si}>{s}</li>
                       ))}
                     </ul>
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
+              ))}
+            </div>
+          </section>
 
-            {/* ── Get in Touch ── */}
-            <section className="about-page-connect">
-              <span className="eyebrow about-light-eyebrow">GET IN TOUCH</span>
-              <p className="about-page-connect-text">
-                Interested in collaborating, discussing ideas, or just want to
-                say hello? I&#39;m always open to new conversations.
-              </p>
-              {profile.email && (
-                <a
-                  className="about-page-email-link"
-                  href={`mailto:${profile.email}`}
-                >
-                  {profile.email}
-                </a>
-              )}
-            </section>
-          </article>
+          {/* ── ACHIEVEMENTS ──────────────────────────── */}
+          <section className="alux-section" id="achievements">
+            <header className="alux-section-head">
+              <span className="alux-eyebrow">Achievements</span>
+              <span className="alux-section-count">{String(achievements.length).padStart(2, "0")}</span>
+            </header>
+
+            <div className="alux-awards">
+              {achievements.map((ach, i) => (
+                <div className="alux-award-row" key={i}>
+                  <div className="alux-award-rank">
+                    <span className="alux-award-num">{ach.rank}</span>
+                    {ach.scope && <span className="alux-award-scope">{ach.scope}</span>}
+                  </div>
+                  <div className="alux-award-body">
+                    <div className="alux-award-top">
+                      <h3 className="alux-award-title">{ach.title}</h3>
+                      <span className="alux-award-year">{ach.year}</span>
+                    </div>
+                    <p className="alux-award-desc">{ach.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── EDUCATION ─────────────────────────────── */}
+          <section className="alux-section" id="education">
+            <header className="alux-section-head">
+              <span className="alux-eyebrow">Education</span>
+              <span className="alux-section-count">{String(education.length).padStart(2, "0")}</span>
+            </header>
+
+            <div className="alux-edu-list">
+              {education.map((edu, i) => (
+                <div className="alux-edu-row" key={i}>
+                  <div className="alux-edu-logo-wrap">
+                    <Image
+                      src={edu.logo}
+                      alt={edu.institution}
+                      width={56}
+                      height={56}
+                      className="alux-edu-logo"
+                    />
+                  </div>
+                  <div className="alux-edu-body">
+                    <div className="alux-edu-top">
+                      <div>
+                        <h3 className="alux-edu-degree">
+                          {edu.degree}
+                          <span className="alux-edu-field"> — {edu.field}</span>
+                        </h3>
+                        <p className="alux-edu-inst">{edu.institution}</p>
+                      </div>
+                      <div className="alux-edu-right">
+                        <span className="alux-edu-period">{edu.period}</span>
+                        <span className="alux-edu-loc">{edu.location}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── TECH STACKS ───────────────────────────── */}
+          <section className="alux-section" id="tech">
+            <header className="alux-section-head">
+              <span className="alux-eyebrow">Tech Stacks</span>
+              <span className="alux-section-count">{String(techStacks.length).padStart(2, "0")}</span>
+            </header>
+
+            <div className="alux-tech-grid">
+              {techStacks.map((cat, i) => (
+                <div className="alux-tech-col" key={i}>
+                  <h4 className="alux-tech-cat">{cat.category}</h4>
+                  <ul className="alux-tech-list">
+                    {cat.items.map((item, ti) => (
+                      <li key={ti}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── CTA ───────────────────────────────────── */}
+          <section className="alux-cta">
+            <p className="alux-cta-label">Get in touch</p>
+            <h2 className="alux-cta-heading">
+              Let&apos;s build<br />
+              something real.
+            </h2>
+            {profile.email && (
+              <a className="alux-cta-link" href={`mailto:${profile.email}`}>
+                <span>{profile.email}</span>
+                <ArrowUpRight size={20} />
+              </a>
+            )}
+          </section>
+
         </AboutPageAnimations>
       </main>
 
