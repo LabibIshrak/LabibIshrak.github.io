@@ -44,187 +44,233 @@ export function AboutPageAnimations({
     media.add("(prefers-reduced-motion: no-preference)", () => {
       const context = gsap.context(() => {
         // Animate the lead paragraph words
-        gsap.from(".about-reveal-word", {
-          opacity: 0.12,
-          y: 6,
-          stagger: 0.03,
-          duration: 0.6,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-page-lead",
-            start: "top 85%",
-            once: true,
-          },
-        });
+        const leadEl = root.querySelector(".about-page-lead");
+        if (leadEl) {
+          gsap.from(root.querySelectorAll(".about-reveal-word"), {
+            opacity: 0.12,
+            y: 6,
+            stagger: 0.03,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: leadEl,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
 
-        // Stagger-in the detail blocks
-        gsap.from(".about-page-block", {
-          opacity: 0,
-          y: 40,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".about-page-details",
-            start: "top 80%",
-            once: true,
-          },
-        });
+        // Stagger-in the old detail blocks (if present on other pages)
+        const detailsEl = root.querySelector(".about-page-details");
+        if (detailsEl) {
+          gsap.from(root.querySelectorAll(".about-page-block"), {
+            opacity: 0,
+            y: 40,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: detailsEl,
+              start: "top 80%",
+              once: true,
+            },
+          });
+        }
 
-        // Stagger-in the skill pills
-        gsap.from(".about-page-skill-grid li", {
-          opacity: 0,
-          y: 20,
-          scale: 0.92,
-          stagger: 0.06,
-          duration: 0.5,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-page-skills",
-            start: "top 85%",
-            once: true,
-          },
-        });
+        // Stagger-in the old skill pills (if present on other pages)
+        const skillsEl = root.querySelector(".about-page-skills");
+        if (skillsEl) {
+          gsap.from(root.querySelectorAll(".about-page-skill-grid li"), {
+            opacity: 0,
+            y: 20,
+            scale: 0.92,
+            stagger: 0.06,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: skillsEl,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
 
         // Fade in the contact section
-        gsap.from(".about-page-connect", {
-          opacity: 0,
-          y: 35,
-          duration: 0.7,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-page-connect",
-            start: "top 88%",
-            once: true,
-          },
-        });
+        const connectEl = root.querySelector(".about-page-connect");
+        if (connectEl) {
+          gsap.from(connectEl, {
+            opacity: 0,
+            y: 35,
+            duration: 0.7,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: connectEl,
+              start: "top 88%",
+              once: true,
+            },
+          });
+        }
+
+        // ── Portrait photo ──
+        const portraitEl = root.querySelector(".about-portrait");
+        if (portraitEl) {
+          gsap.from(portraitEl, {
+            opacity: 0,
+            y: 40,
+            scale: 0.95,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: portraitEl,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
 
         // ── Experience timeline entries ──
-        gsap.from(".timeline-entry", {
-          opacity: 0,
-          y: 50,
-          stagger: 0.18,
-          duration: 0.85,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".experience-timeline",
-            start: "top 80%",
-            once: true,
-          },
-        });
+        const timelineEl = root.querySelector(".experience-timeline");
+        if (timelineEl) {
+          gsap.from(root.querySelectorAll(".timeline-entry"), {
+            opacity: 0,
+            y: 50,
+            stagger: 0.18,
+            duration: 0.85,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: timelineEl,
+              start: "top 80%",
+              once: true,
+            },
+          });
 
-        // Timeline line grows in
-        gsap.from(".timeline-line", {
-          scaleY: 0,
-          transformOrigin: "top center",
-          stagger: 0.2,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".experience-timeline",
-            start: "top 80%",
-            once: true,
-          },
-        });
+          // Timeline line grows in
+          gsap.from(root.querySelectorAll(".timeline-line"), {
+            scaleY: 0,
+            transformOrigin: "top center",
+            stagger: 0.2,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: timelineEl,
+              start: "top 80%",
+              once: true,
+            },
+          });
 
-        // Timeline dots pulse in
-        gsap.from(".timeline-dot", {
-          scale: 0,
-          stagger: 0.18,
-          duration: 0.5,
-          ease: "back.out(2)",
-          scrollTrigger: {
-            trigger: ".experience-timeline",
-            start: "top 80%",
-            once: true,
-          },
-        });
+          // Timeline dots pulse in
+          gsap.from(root.querySelectorAll(".timeline-dot"), {
+            scale: 0,
+            stagger: 0.18,
+            duration: 0.5,
+            ease: "back.out(2)",
+            scrollTrigger: {
+              trigger: timelineEl,
+              start: "top 80%",
+              once: true,
+            },
+          });
+        }
 
         // ── Achievement cards ──
-        gsap.from(".achievement-card", {
-          opacity: 0,
-          y: 40,
-          scale: 0.96,
-          stagger: 0.12,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".achievements-grid",
-            start: "top 82%",
-            once: true,
-          },
-        });
+        const achievementsEl = root.querySelector(".achievements-grid");
+        if (achievementsEl) {
+          gsap.from(root.querySelectorAll(".achievement-card"), {
+            opacity: 0,
+            y: 40,
+            scale: 0.96,
+            stagger: 0.12,
+            duration: 0.7,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: achievementsEl,
+              start: "top 82%",
+              once: true,
+            },
+          });
+        }
 
         // ── Education entries ──
-        gsap.from(".education-entry", {
-          opacity: 0,
-          y: 40,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".education-list",
-            start: "top 82%",
-            once: true,
-          },
-        });
+        const educationEl = root.querySelector(".education-list");
+        if (educationEl) {
+          gsap.from(root.querySelectorAll(".education-entry"), {
+            opacity: 0,
+            y: 40,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: educationEl,
+              start: "top 82%",
+              once: true,
+            },
+          });
+        }
 
         // ── Tech categories ──
-        gsap.from(".tech-category", {
-          opacity: 0,
-          y: 35,
-          stagger: 0.1,
-          duration: 0.65,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".tech-grid",
-            start: "top 85%",
-            once: true,
-          },
-        });
+        const techEl = root.querySelector(".tech-grid");
+        if (techEl) {
+          gsap.from(root.querySelectorAll(".tech-category"), {
+            opacity: 0,
+            y: 35,
+            stagger: 0.1,
+            duration: 0.65,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: techEl,
+              start: "top 85%",
+              once: true,
+            },
+          });
 
-        // Tech pills stagger
-        gsap.from(".tech-items li", {
-          opacity: 0,
-          y: 15,
-          scale: 0.9,
-          stagger: 0.035,
-          duration: 0.45,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".tech-grid",
-            start: "top 78%",
-            once: true,
-          },
-        });
+          // Tech pills stagger
+          gsap.from(root.querySelectorAll(".tech-items li"), {
+            opacity: 0,
+            y: 15,
+            scale: 0.9,
+            stagger: 0.035,
+            duration: 0.45,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: techEl,
+              start: "top 78%",
+              once: true,
+            },
+          });
+        }
 
         // ── Section headers slide in ──
-        gsap.from(".about-section-header", {
-          opacity: 0,
-          x: -30,
-          stagger: 0.15,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top 85%",
-            once: true,
-          },
-        });
+        const sectionHeaders = root.querySelectorAll(".about-section-header");
+        if (sectionHeaders.length) {
+          sectionHeaders.forEach((header) => {
+            gsap.from(header, {
+              opacity: 0,
+              x: -30,
+              duration: 0.7,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: header,
+                start: "top 85%",
+                once: true,
+              },
+            });
 
-        // Section rule lines grow
-        gsap.from(".about-section-rule", {
-          scaleX: 0,
-          transformOrigin: "left center",
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top 85%",
-            once: true,
-          },
-        });
+            const rule = header.querySelector(".about-section-rule");
+            if (rule) {
+              gsap.from(rule, {
+                scaleX: 0,
+                transformOrigin: "left center",
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: header,
+                  start: "top 85%",
+                  once: true,
+                },
+              });
+            }
+          });
+        }
       }, root);
 
       return () => context.revert();

@@ -588,11 +588,57 @@
 }
 
 /* =========================================
-   ABOUT PAGE (dedicated route)
+   ABOUT PAGE (dedicated route) — LIGHT THEME
    ========================================= */
 
 .about-page-main .navigation {
   position: relative;
+}
+
+/* ── Light theme scoping ── */
+
+.about-page-light {
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+.about-page-light .navigation a,
+.about-page-light .wordmark {
+  color: #1a1a1a;
+}
+
+.about-page-light .wordmark-symbol {
+  color: #1a1a1a;
+}
+
+.about-back-link {
+  color: #666 !important;
+}
+
+.about-light-eyebrow {
+  color: #888 !important;
+}
+
+.about-page-light .about-page-label {
+  color: #888;
+}
+
+.about-page-light .mobile-menu-trigger {
+  color: #1a1a1a;
+}
+
+.about-page-light .mobile-menu:not([hidden]) {
+  background: #fff;
+  box-shadow: 0 25px 50px rgb(0 0 0 / 10%);
+}
+
+.about-page-light .mobile-menu a {
+  color: #1a1a1a;
+  border-bottom-color: rgb(0 0 0 / 8%);
+}
+
+.about-page-light .desktop-navigation a::after {
+  background: #1a1a1a;
 }
 
 .about-page {
@@ -603,10 +649,6 @@
   margin-top: 50px;
 }
 
-.about-page-header .eyebrow {
-  color: var(--muted);
-}
-
 .about-page-header h1 {
   max-width: 900px;
   margin-top: 25px;
@@ -614,7 +656,65 @@
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.065em;
+  color: #1a1a1a;
 }
+
+/* ── Intro with portrait ── */
+
+.about-intro-split {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(40px, 5vw, 80px);
+  align-items: start;
+  margin-top: 65px;
+  padding-top: 55px;
+  border-top: 1px solid rgb(0 0 0 / 10%);
+}
+
+.about-intro-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-page-light .about-page-lead {
+  grid-column: auto;
+  max-width: 800px;
+  font-size: clamp(24px, 3vw, 42px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.035em;
+  color: #2a2a2a;
+}
+
+.about-portrait-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #eee;
+}
+
+.about-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.about-portrait-caption {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0.02em;
+}
+
+/* ── Shared page styles (old) ── */
 
 .about-page-intro {
   display: grid;
@@ -693,8 +793,16 @@
 .about-page-connect {
   margin-top: clamp(70px, 9vw, 130px);
   padding-top: 45px;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid rgb(0 0 0 / 10%);
   padding-bottom: clamp(45px, 6vw, 90px);
+}
+
+.about-page-light .about-page-connect-text {
+  max-width: 550px;
+  margin-top: 22px;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.65;
+  color: #555;
 }
 
 .about-page-connect-text {
@@ -703,6 +811,19 @@
   font-size: clamp(16px, 1.3vw, 19px);
   line-height: 1.65;
   color: #c6c7cc;
+}
+
+.about-page-light .about-page-email-link {
+  display: inline-flex;
+  min-height: 60px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 18px 32px;
+  border: 1px solid rgb(0 0 0 / 14%);
+  border-radius: 99px;
+  font-size: 16px;
+  color: #1a1a1a;
+  transition: background 200ms, border-color 200ms, color 200ms;
 }
 
 .about-page-email-link {
@@ -717,14 +838,205 @@
   transition: background 200ms, border-color 200ms;
 }
 
+.about-page-light .about-page-email-link:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
 .about-page-email-link:hover {
   background: var(--accent);
   border-color: var(--accent);
 }
 
+/* ── Light theme overrides for new sections ── */
+
+.about-page-light .about-section-rule {
+  background: rgb(0 0 0 / 10%);
+}
+
+/* Timeline light */
+.about-page-light .timeline-title {
+  color: #1a1a1a;
+}
+
+.about-page-light .timeline-company {
+  color: #444;
+}
+
+.about-page-light .timeline-type {
+  color: #888;
+}
+
+.about-page-light .timeline-period {
+  color: #666;
+  border-color: rgb(0 0 0 / 12%);
+}
+
+.about-page-light .timeline-location {
+  color: #888;
+}
+
+.about-page-light .timeline-description {
+  color: #555;
+}
+
+.about-page-light .timeline-dot {
+  border-color: #fafafa;
+}
+
+.about-page-light .timeline-line {
+  background: linear-gradient(
+    to bottom,
+    var(--accent) 0%,
+    rgb(69 92 233 / 20%) 40%,
+    rgb(0 0 0 / 8%) 100%
+  );
+}
+
+.about-page-light .timeline-content {
+  border-bottom-color: rgb(0 0 0 / 8%);
+}
+
+.about-page-light .timeline-skills li {
+  background: rgb(69 92 233 / 8%);
+  border-color: rgb(69 92 233 / 15%);
+  color: #455ce9;
+}
+
+.about-page-light .timeline-skills li:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* Achievement cards light */
+.about-page-light .achievement-card {
+  border-color: rgb(0 0 0 / 8%);
+  background: rgb(0 0 0 / 2%);
+}
+
+.about-page-light .achievement-card:hover {
+  background: rgb(0 0 0 / 4%);
+  border-color: rgb(69 92 233 / 25%);
+}
+
+.about-page-light .achievement-index {
+  color: rgb(69 92 233 / 25%);
+}
+
+.about-page-light .achievement-card:hover .achievement-index {
+  color: var(--accent);
+}
+
+.about-page-light .achievement-title {
+  color: #1a1a1a;
+}
+
+.about-page-light .achievement-event {
+  color: #555;
+}
+
+.about-page-light .achievement-year {
+  color: #888;
+}
+
+.about-page-light .achievement-desc {
+  color: #666;
+}
+
+/* Education light */
+.about-page-light .education-period {
+  color: #1a1a1a;
+}
+
+.about-page-light .education-location {
+  color: #888;
+}
+
+.about-page-light .education-degree {
+  color: #1a1a1a;
+}
+
+.about-page-light .education-institution {
+  color: #444;
+}
+
+.about-page-light .education-description {
+  color: #666;
+}
+
+.about-page-light .education-entry {
+  border-bottom-color: rgb(0 0 0 / 8%);
+}
+
+.about-page-light .education-highlights li {
+  border-color: rgb(0 0 0 / 12%);
+  color: #555;
+}
+
+.about-page-light .education-highlights li:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Education logo */
+.education-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.education-logo-wrap {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgb(0 0 0 / 8%);
+  display: grid;
+  place-items: center;
+}
+
+.education-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.education-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Tech stacks light */
+.about-page-light .tech-category-label {
+  color: #1a1a1a;
+  border-bottom-color: rgb(0 0 0 / 10%);
+}
+
+.about-page-light .tech-items li {
+  border-color: rgb(0 0 0 / 12%);
+  color: #555;
+}
+
+.about-page-light .tech-items li:hover {
+  background: rgb(69 92 233 / 10%);
+  border-color: rgb(69 92 233 / 25%);
+  color: #455ce9;
+}
+
 /* Tablet */
 
 @media (max-width: 1100px) {
+  .about-intro-split {
+    grid-template-columns: 1fr 0.85fr;
+    gap: 35px;
+  }
+
   .about-page-intro {
     grid-template-columns: 1fr;
     gap: 0;
@@ -752,6 +1064,16 @@
 
   .about-page-header h1 {
     font-size: clamp(42px, 11vw, 58px);
+  }
+
+  .about-intro-split {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-portrait {
+    max-width: 320px;
+    border-radius: 12px;
   }
 
   .about-page-intro {
@@ -785,6 +1107,18 @@
 
   .about-page-connect {
     margin-top: 55px;
+  }
+
+  .education-left {
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .education-meta {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
   }
 }
 

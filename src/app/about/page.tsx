@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
@@ -9,11 +10,11 @@ import { profile } from "@/lib/content";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Hasin Ishrak Labib — Computer Science & Software Engineering undergraduate, full-stack developer, and AI/ML researcher based in Bangladesh.",
+    "Hasin Ishrak Labib — CSE undergraduate at PUST, Co-founder & CEO of Vantaloc, full-stack developer, and builder based in Bangladesh.",
 };
 
 const leadText =
-  "I'm Hasin Ishrak Labib, a second-year Computer Science & Software Engineering undergraduate based in Bangladesh. I build production-grade applications from the ground up and pursue research at the intersection of artificial intelligence and machine learning.";
+  "I'm Hasin Ishrak Labib — a Computer Science & Engineering undergraduate, entrepreneur, and builder based in Bangladesh. I co-founded Vantaloc, a SaaS company delivering websites, AI agents, software, and mobile apps to clients worldwide.";
 
 /* ── Experience timeline data ── */
 
@@ -29,44 +30,24 @@ type ExperienceEntry = {
 
 const experiences: ExperienceEntry[] = [
   {
-    title: "Undergraduate Research Assistant",
-    company: "American International University-Bangladesh",
+    title: "Co-founder & CEO",
+    company: "Vantaloc",
+    type: "Full-time",
+    period: "2025 — Present",
+    location: "Bangladesh",
+    description:
+      "Co-founded and lead Vantaloc, a SaaS company building websites, AI agents, software solutions, and Android applications for clients. Overseeing product strategy, technical architecture, and client delivery end-to-end.",
+    skills: ["SaaS", "AI Agents", "Next.js", "Flutter", "Product Strategy", "Leadership"],
+  },
+  {
+    title: "Product Lead",
+    company: "Mezai Tech",
     type: "Part-time",
-    period: "Jun 2025 — Present",
-    location: "Dhaka, Bangladesh",
+    period: "2025 — Present",
+    location: "Bangladesh",
     description:
-      "Conducting research at the intersection of AI/ML and software engineering. Working on machine learning pipelines, intelligent systems, and publishing findings in academic venues.",
-    skills: ["Machine Learning", "Python", "Research", "Data Analysis"],
-  },
-  {
-    title: "Full-Stack Developer",
-    company: "Freelance",
-    type: "Self-employed",
-    period: "Jan 2025 — Present",
-    location: "Remote",
-    description:
-      "Building production-grade web and mobile applications for clients. End-to-end delivery from architecture and system design to pixel-level interface polish.",
-    skills: ["Next.js", "Flutter", "Node.js", "Firebase", "REST APIs"],
-  },
-  {
-    title: "Flutter Developer",
-    company: "Personal Projects",
-    type: "Self-directed",
-    period: "Sep 2024 — Present",
-    location: "Dhaka, Bangladesh",
-    description:
-      "Designing and developing cross-platform mobile applications using Flutter. Building recipe apps, fitness trackers, and utility tools with clean architecture patterns.",
-    skills: ["Flutter", "Dart", "Firebase", "UI/UX Design"],
-  },
-  {
-    title: "Competitive Programmer",
-    company: "Codeforces / LeetCode",
-    type: "Practice",
-    period: "Jan 2024 — Present",
-    location: "Online",
-    description:
-      "Solving algorithmic problems and participating in contests. Strengthening problem-solving skills in data structures, algorithms, and mathematical reasoning.",
-    skills: ["C++", "Algorithms", "Data Structures", "Problem Solving"],
+      "Leading product development at Mezai Tech, a digital service provider. Defining product roadmaps, coordinating cross-functional teams, and ensuring timely delivery of digital solutions for diverse clients.",
+    skills: ["Product Management", "Digital Services", "Team Leadership", "Agile"],
   },
 ];
 
@@ -81,32 +62,25 @@ type Achievement = {
 
 const achievements: Achievement[] = [
   {
-    title: "Dean's List",
-    event: "AIUB Academic Excellence",
-    year: "2025",
+    title: "4th Place Nationally",
+    event: "July Hackathon 2026",
+    year: "2026",
     description:
-      "Recognized for outstanding academic performance in the Faculty of Science & Technology.",
+      "Secured 4th position nationally in the July Hackathon 2026, competing against teams from across Bangladesh.",
   },
   {
-    title: "Research Paper Submitted",
-    event: "AI/ML Conference",
-    year: "2025",
+    title: "Finalist",
+    event: "PSTU Hackathon Final 2026",
+    year: "2026",
     description:
-      "Submitted research paper on intelligent systems and machine learning pipelines to a peer-reviewed venue.",
+      "Reached the final round of the PSTU Hackathon 2026, building and presenting a full solution under competitive pressure.",
   },
   {
-    title: "Hackathon Finalist",
-    event: "AIUB Hackathon 2024",
-    year: "2024",
+    title: "Regional Championship Winner",
+    event: "Creative Talent Hunt",
+    year: "2018 — 2021",
     description:
-      "Built a full-stack application in 24 hours and reached the finalist round among 50+ teams.",
-  },
-  {
-    title: "Open Source Contributor",
-    event: "GitHub Community",
-    year: "2024",
-    description:
-      "Contributed to open-source Flutter packages and developer tooling projects on GitHub.",
+      "Former Regional Championship Winner of Creative Talent Hunt. Held the title for three consecutive years from 2018 to 2021.",
   },
 ];
 
@@ -118,32 +92,35 @@ type Education = {
   period: string;
   location: string;
   description: string;
+  logo?: string;
   highlights?: string[];
 };
 
 const education: Education[] = [
   {
-    degree: "B.Sc. in Computer Science & Software Engineering",
-    institution: "American International University-Bangladesh (AIUB)",
+    degree: "B.Sc. Engineering in Computer Science & Engineering",
+    institution: "Pabna University of Science and Technology (PUST)",
     period: "2024 — Present",
-    location: "Dhaka, Bangladesh",
+    location: "Pabna, Bangladesh",
+    logo: "/pust-logo.png",
     description:
-      "Pursuing a comprehensive degree covering data structures, algorithms, software engineering principles, database systems, and artificial intelligence.",
+      "Pursuing a comprehensive engineering degree covering data structures, algorithms, software engineering, database systems, and artificial intelligence.",
     highlights: [
       "Data Structures & Algorithms",
       "Object-Oriented Programming",
-      "Database Management Systems",
+      "Database Systems",
       "Artificial Intelligence",
       "Software Engineering",
     ],
   },
   {
     degree: "Higher Secondary Certificate (HSC)",
-    institution: "Dhaka College",
+    institution: "Rajshahi College",
     period: "2021 — 2023",
-    location: "Dhaka, Bangladesh",
+    location: "Rajshahi, Bangladesh",
+    logo: "/rajshahi-college-logo.png",
     description:
-      "Completed higher secondary education in the Science group with a focus on Mathematics, Physics, and Chemistry.",
+      "Completed higher secondary education in the Science group from one of the most prestigious colleges in Bangladesh.",
     highlights: ["Science Group", "Mathematics", "Physics"],
   },
 ];
@@ -185,36 +162,54 @@ const techStacks: TechCategory[] = [
 export default function AboutPage() {
   return (
     <div className="page-shell">
-      <main id="main" className="main-curtain about-page-main">
+      <main id="main" className="main-curtain about-page-main about-page-light">
         <Navigation />
 
         <AboutPageAnimations>
           <article className="about-page section-padding">
-            <TransitionLink href="/" className="back-link">
+            <TransitionLink href="/" className="back-link about-back-link">
               <ArrowLeft size={18} />
               Back to home
             </TransitionLink>
 
             <header className="about-page-header">
-              <span className="eyebrow">WHO I AM</span>
+              <span className="eyebrow about-light-eyebrow">WHO I AM</span>
 
               <h1 data-page-heading tabIndex={-1}>
                 Labib — developer,
                 <br />
-                researcher, builder.
+                entrepreneur, builder.
               </h1>
             </header>
 
-            <div className="about-page-intro">
-              <p className="about-page-lead">
-                <SplitWords text={leadText} />
-              </p>
+            {/* ── Intro with photo ── */}
+            <div className="about-page-intro about-intro-split">
+              <div className="about-intro-text">
+                <p className="about-page-lead">
+                  <SplitWords text={leadText} />
+                </p>
+              </div>
+              <div className="about-portrait-wrap">
+                <div className="about-portrait">
+                  <Image
+                    src="/portrait-placeholder.png"
+                    alt="Hasin Ishrak Labib"
+                    width={420}
+                    height={520}
+                    className="about-portrait-img"
+                    priority
+                  />
+                </div>
+                <span className="about-portrait-caption">
+                  Hasin Ishrak Labib — Bangladesh
+                </span>
+              </div>
             </div>
 
             {/* ── Experience Timeline ── */}
             <section className="about-section" id="experience">
               <div className="about-section-header">
-                <span className="eyebrow about-page-label">EXPERIENCE</span>
+                <span className="eyebrow about-light-eyebrow">EXPERIENCE</span>
                 <div className="about-section-rule" />
               </div>
 
@@ -256,7 +251,7 @@ export default function AboutPage() {
             {/* ── Achievements ── */}
             <section className="about-section" id="achievements">
               <div className="about-section-header">
-                <span className="eyebrow about-page-label">ACHIEVEMENTS</span>
+                <span className="eyebrow about-light-eyebrow">ACHIEVEMENTS</span>
                 <div className="about-section-rule" />
               </div>
 
@@ -282,7 +277,7 @@ export default function AboutPage() {
             {/* ── Education ── */}
             <section className="about-section" id="education">
               <div className="about-section-header">
-                <span className="eyebrow about-page-label">EDUCATION</span>
+                <span className="eyebrow about-light-eyebrow">EDUCATION</span>
                 <div className="about-section-rule" />
               </div>
 
@@ -290,8 +285,21 @@ export default function AboutPage() {
                 {education.map((edu, i) => (
                   <div className="education-entry" key={i}>
                     <div className="education-left">
-                      <span className="education-period">{edu.period}</span>
-                      <span className="education-location">{edu.location}</span>
+                      {edu.logo && (
+                        <div className="education-logo-wrap">
+                          <Image
+                            src={edu.logo}
+                            alt={edu.institution}
+                            width={52}
+                            height={52}
+                            className="education-logo"
+                          />
+                        </div>
+                      )}
+                      <div className="education-meta">
+                        <span className="education-period">{edu.period}</span>
+                        <span className="education-location">{edu.location}</span>
+                      </div>
                     </div>
                     <div className="education-right">
                       <h3 className="education-degree">{edu.degree}</h3>
@@ -313,7 +321,7 @@ export default function AboutPage() {
             {/* ── Tech Stacks ── */}
             <section className="about-section" id="tech-stacks">
               <div className="about-section-header">
-                <span className="eyebrow about-page-label">TECH STACKS</span>
+                <span className="eyebrow about-light-eyebrow">TECH STACKS</span>
                 <div className="about-section-rule" />
               </div>
 
@@ -333,9 +341,9 @@ export default function AboutPage() {
 
             {/* ── Get in Touch ── */}
             <section className="about-page-connect">
-              <span className="eyebrow about-page-label">GET IN TOUCH</span>
+              <span className="eyebrow about-light-eyebrow">GET IN TOUCH</span>
               <p className="about-page-connect-text">
-                Interested in collaborating, discussing research, or just want to
+                Interested in collaborating, discussing ideas, or just want to
                 say hello? I&#39;m always open to new conversations.
               </p>
               {profile.email && (
