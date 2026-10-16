@@ -98,6 +98,133 @@ export function AboutPageAnimations({
             once: true,
           },
         });
+
+        // ── Experience timeline entries ──
+        gsap.from(".timeline-entry", {
+          opacity: 0,
+          y: 50,
+          stagger: 0.18,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".experience-timeline",
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        // Timeline line grows in
+        gsap.from(".timeline-line", {
+          scaleY: 0,
+          transformOrigin: "top center",
+          stagger: 0.2,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".experience-timeline",
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        // Timeline dots pulse in
+        gsap.from(".timeline-dot", {
+          scale: 0,
+          stagger: 0.18,
+          duration: 0.5,
+          ease: "back.out(2)",
+          scrollTrigger: {
+            trigger: ".experience-timeline",
+            start: "top 80%",
+            once: true,
+          },
+        });
+
+        // ── Achievement cards ──
+        gsap.from(".achievement-card", {
+          opacity: 0,
+          y: 40,
+          scale: 0.96,
+          stagger: 0.12,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".achievements-grid",
+            start: "top 82%",
+            once: true,
+          },
+        });
+
+        // ── Education entries ──
+        gsap.from(".education-entry", {
+          opacity: 0,
+          y: 40,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".education-list",
+            start: "top 82%",
+            once: true,
+          },
+        });
+
+        // ── Tech categories ──
+        gsap.from(".tech-category", {
+          opacity: 0,
+          y: 35,
+          stagger: 0.1,
+          duration: 0.65,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".tech-grid",
+            start: "top 85%",
+            once: true,
+          },
+        });
+
+        // Tech pills stagger
+        gsap.from(".tech-items li", {
+          opacity: 0,
+          y: 15,
+          scale: 0.9,
+          stagger: 0.035,
+          duration: 0.45,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".tech-grid",
+            start: "top 78%",
+            once: true,
+          },
+        });
+
+        // ── Section headers slide in ──
+        gsap.from(".about-section-header", {
+          opacity: 0,
+          x: -30,
+          stagger: 0.15,
+          duration: 0.7,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 85%",
+            once: true,
+          },
+        });
+
+        // Section rule lines grow
+        gsap.from(".about-section-rule", {
+          scaleX: 0,
+          transformOrigin: "left center",
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 85%",
+            once: true,
+          },
+        });
       }, root);
 
       return () => context.revert();
