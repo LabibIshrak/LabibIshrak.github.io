@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 function SplitWords({ text, className }: { text: string; className?: string }) {
   return (

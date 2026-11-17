@@ -558,25 +558,6 @@ button:focus-visible,
   color: #0a0a0a;
 }
 
-/* Contact diagonal slide-in overlay */
-
-.contact-slide-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.contact-slide-panel {
-  position: absolute;
-  inset: 0;
-  background: #0a0a0a;
-  transform: translate(100%, 100%) scale(0.5);
-  border-radius: 28px;
-  will-change: transform, border-radius;
-}
-
 /* =========================================
    BRACKET-FRAME FOOTER (monochrome)
    ========================================= */
@@ -990,9 +971,10 @@ button:focus-visible,
     height: 40px;
   }
 
-  .globe-circle svg {
+  .globe-circle .location-globe {
     width: 26px;
     height: 26px;
+    font-size: 10.4px;
   }
 
   
@@ -1228,31 +1210,134 @@ button:focus-visible,
   border-radius: 50%;
 }
 
+/* Wireframe globe: CSS rings, see rotating-globe.tsx.
+   All sizes are in em so the globe scales with its font-size. */
 .location-globe {
   position: relative;
   display: block;
   width: 33px;
   height: 33px;
+  font-size: 13px;
+  contain: layout paint;
 }
 
-.globe-circle .location-globe svg {
+.lg-sphere {
   position: absolute;
   inset: 0;
-  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.12em currentColor;
+  transform: rotate(14deg);
+  animation: lg-rock 5.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.lg-meridian,
+.lg-latitude,
+.lg-equator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lg-meridian {
   width: 100%;
   height: 100%;
-  overflow: visible;
-  stroke: currentColor;
-  stroke-width: 1.5;
+  border-radius: 50%;
+  animation: lg-sweep 2.8s infinite;
 }
 
-.location-globe-frame {
-  opacity: 1;
+.lg-meridian:nth-child(2) {
+  animation-delay: -0.933s;
 }
 
-/* Far side of the globe — faint so the spin reads as 3D depth */
-.location-globe-back {
-  opacity: 0.22;
+.lg-meridian:nth-child(3) {
+  animation-delay: -1.867s;
+}
+
+.lg-latitude {
+  width: 150%;
+  height: 55%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.11em currentColor;
+}
+
+.lg-equator {
+  width: 150%;
+  height: 0.11em;
+  background: currentColor;
+}
+
+.location-globe[data-paused="true"] .lg-sphere,
+.location-globe[data-paused="true"] .lg-meridian {
+  animation-play-state: paused;
+}
+
+/* The sphere tilts gently left and right while it spins. */
+@keyframes lg-rock {
+  0%,
+  100% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-14deg);
+  }
+}
+
+/* A meridian sweeps from the left limb to the centre (where it is seen
+   edge-on as a straight line) and out to the right limb. Sine easing
+   matches the projection of a real rotating circle. */
+@keyframes lg-sweep {
+  0% {
+    width: 100%;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset 0.09em 0 0 0.05em currentColor;
+    animation-timing-function: cubic-bezier(0.12, 0, 0.39, 0);
+  }
+  49% {
+    width: 0.2em;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset 0.09em 0 0 0.05em currentColor;
+    animation-timing-function: linear;
+  }
+  50% {
+    width: 0.12em;
+    border-radius: 0;
+    background: currentColor;
+    box-shadow: none;
+    animation-timing-function: linear;
+  }
+  51% {
+    width: 0.2em;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset -0.09em 0 0 0.05em currentColor;
+    animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
+  }
+  100% {
+    width: 100%;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: inset -0.09em 0 0 0.05em currentColor;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Static globe: spread the meridians out instead of stacking them. */
+  .lg-meridian {
+    box-shadow: inset 0 0 0 0.09em currentColor;
+  }
+  .lg-meridian:nth-child(2) {
+    width: 50%;
+  }
+  .lg-meridian:nth-child(3) {
+    width: 0.12em;
+    border-radius: 0;
+    background: currentColor;
+    box-shadow: none;
+  }
 }
 
 /* =========================================
@@ -1284,6 +1369,7 @@ button:focus-visible,
   .location-globe {
     width: 26px;
     height: 26px;
+    font-size: 10.4px;
   }
 }
 

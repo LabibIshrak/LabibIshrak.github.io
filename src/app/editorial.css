@@ -395,6 +395,20 @@
   }
 }
 
+/* Touch: a tap plays the same row animation as the desktop hover. */
+.editorial-project-row.is-touched .editorial-project-title h3 {
+  color: #888888;
+  transform: translateX(-10px);
+}
+
+.editorial-project-row.is-touched .editorial-project-arrow {
+  transform: translate(5px, -5px);
+}
+
+.editorial-mobile-art {
+  transform-origin: center;
+}
+
 /* Tablet */
 
 @media (max-width: 1100px) {
