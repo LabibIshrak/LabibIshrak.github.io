@@ -1,0 +1,600 @@
+/* =========================================================
+   ABOUT PAGE
+   Same visual language as the home page: one sans, weight 450,
+   generous negative space, hairline rules, a light grey band
+   for alternating sections and a single accent (the globe).
+   ========================================================= */
+
+.about-lux-main {
+  --ab-ink: #1c1d20;
+  --ab-muted: #85868b;
+  --ab-line: rgb(28 29 32 / 14%);
+  --ab-paper: #ffffff;
+  --ab-band: #e9eaeb;
+  --ab-accent: #455ce9;
+
+  --ab-gutter: clamp(22px, 6vw, 120px);
+  --ab-gutter-medium: clamp(22px, 12vw, 240px);
+
+  background: var(--ab-paper);
+  color: var(--ab-ink);
+  font-family: var(--sans);
+  font-weight: 450;
+  overflow-x: clip;
+}
+
+/* Navigation sits on white here, so it switches to dark ink. */
+.about-lux-main .navigation {
+  position: relative;
+  background: var(--ab-paper);
+}
+
+.about-lux-main .navigation a,
+.about-lux-main .wordmark,
+.about-lux-main .wordmark-symbol,
+.about-lux-main .mobile-menu-trigger {
+  color: var(--ab-ink);
+}
+
+.about-lux-main .desktop-navigation a::after {
+  background: var(--ab-ink);
+}
+
+.about-lux-main .mobile-menu:not([hidden]) {
+  background: var(--ab-paper);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 8%);
+}
+
+.about-lux-main .mobile-menu a {
+  color: var(--ab-ink);
+  border-bottom-color: var(--ab-line);
+}
+
+/* ── Layout ── */
+
+.ab-wrap {
+  width: 100%;
+  max-width: 1680px;
+  margin-inline: auto;
+  padding-inline: var(--ab-gutter);
+}
+
+.ab-wrap.is-medium {
+  padding-inline: var(--ab-gutter-medium);
+}
+
+/* ── Hero ── */
+
+.ab-hero {
+  padding-top: clamp(110px, 14vw, 230px);
+}
+
+.ab-display {
+  margin: 0;
+  font-size: clamp(42px, 5.6vw, 96px);
+  font-weight: 450;
+  line-height: 1.065;
+  letter-spacing: -0.025em;
+  outline: none;
+}
+
+.ab-line {
+  display: block;
+  overflow: hidden;
+  /* Room for descenders inside the reveal mask. */
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.ab-line > span {
+  display: block;
+  text-wrap: balance;
+}
+
+/* Hairline that runs off the right edge, with the globe sitting on it. */
+.ab-globe-line {
+  position: relative;
+  margin-top: clamp(70px, 9vw, 150px);
+  padding-left: var(--ab-gutter-medium);
+}
+
+.ab-rule {
+  display: block;
+  height: 1px;
+  background: var(--ab-line);
+  transform-origin: left center;
+}
+
+.ab-globe-badge {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--ab-gutter-medium) * 0.75);
+  display: grid;
+  width: clamp(116px, 13vw, 200px);
+  aspect-ratio: 1;
+  place-items: center;
+  color: #fff;
+  background: var(--ab-accent);
+  border-radius: 50%;
+  translate: 0 -50%;
+}
+
+.ab-globe-badge .location-globe {
+  width: clamp(44px, 4.6vw, 70px);
+  height: clamp(44px, 4.6vw, 70px);
+  font-size: clamp(17px, 1.8vw, 27.5px);
+}
+
+.ab-hero-arrow {
+  display: block;
+  width: clamp(16px, 1.3vw, 20px);
+  height: auto;
+  margin-top: clamp(56px, 6vw, 96px);
+  color: var(--ab-ink);
+}
+
+/* ── Intro + portrait ── */
+
+.ab-intro {
+  padding-block: clamp(90px, 10vw, 170px) clamp(110px, 12vw, 200px);
+}
+
+.ab-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(48px, 7vw, 130px);
+  align-items: start;
+}
+
+.ab-intro-copy {
+  padding-top: clamp(0px, 2vw, 40px);
+}
+
+.ab-intro-copy > p {
+  margin: 0;
+  max-width: 34ch;
+  font-size: clamp(17px, 1.3vw, 21px);
+  line-height: 1.66;
+}
+
+.ab-intro-copy > p + p {
+  margin-top: 1.4em;
+}
+
+.ab-muted {
+  color: var(--ab-muted);
+}
+
+.ab-facts {
+  display: grid;
+  margin: clamp(48px, 5vw, 80px) 0 0;
+  max-width: 420px;
+}
+
+.ab-facts > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 16px;
+  border-top: 1px solid var(--ab-line);
+  font-size: 15px;
+}
+
+.ab-facts > div:last-child {
+  border-bottom: 1px solid var(--ab-line);
+}
+
+.ab-facts dt {
+  color: var(--ab-muted);
+}
+
+.ab-facts dd {
+  margin: 0;
+  text-align: right;
+}
+
+.ab-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.ab-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2fa86a;
+  box-shadow: 0 0 0 0 rgb(47 168 106 / 45%);
+  animation: ab-pulse 2.4s ease-out infinite;
+}
+
+@keyframes ab-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(47 168 106 / 45%); }
+  70%, 100% { box-shadow: 0 0 0 8px rgb(47 168 106 / 0%); }
+}
+
+.ab-portrait {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ab-band);
+}
+
+.ab-portrait-inner {
+  position: absolute;
+  inset: -6% 0 0;
+}
+
+.ab-portrait-img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* ── Shared section type ── */
+
+.ab-band {
+  background: var(--ab-band);
+  padding-block: clamp(100px, 11vw, 180px) clamp(120px, 13vw, 210px);
+}
+
+.ab-section {
+  padding-block: clamp(110px, 12vw, 200px) 0;
+}
+
+.ab-section.is-tight {
+  padding-bottom: clamp(110px, 12vw, 200px);
+}
+
+.ab-heading {
+  margin: 0;
+  font-size: clamp(32px, 3.2vw, 54px);
+  font-weight: 450;
+  line-height: 1.065;
+  letter-spacing: -0.02em;
+}
+
+.ab-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: clamp(44px, 5vw, 80px);
+}
+
+.ab-count {
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--ab-muted);
+}
+
+/* ── Column grid (experience, toolbox) ── */
+
+.ab-columns {
+  display: grid;
+  gap: clamp(56px, 6vw, 96px) clamp(32px, 4vw, 64px);
+  margin-top: clamp(70px, 8vw, 130px);
+}
+
+.ab-columns.is-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ab-columns.is-three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ab-index {
+  margin: 0 0 clamp(30px, 3vw, 44px);
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--ab-line);
+  font-size: 12.8px;
+  font-weight: 450;
+  letter-spacing: 0.05em;
+  color: var(--ab-muted);
+}
+
+.ab-col-title {
+  margin: 0;
+  font-size: clamp(24px, 1.9vw, 32px);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.ab-col-sub {
+  margin: 8px 0 0;
+  font-size: clamp(16px, 1.15vw, 18px);
+}
+
+.ab-col-sub span,
+.ab-col-meta {
+  color: var(--ab-muted);
+}
+
+.ab-col-meta {
+  margin: 4px 0 0;
+  font-size: 15px;
+}
+
+.ab-col-text {
+  max-width: 46ch;
+  margin: clamp(26px, 2.4vw, 36px) 0 0;
+  font-size: clamp(16px, 1.1vw, 17px);
+  line-height: 1.66;
+}
+
+.ab-col-tags {
+  margin: 28px 0 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--ab-muted);
+  white-space: pre-wrap;
+}
+
+.ab-stack {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(16px, 1.1vw, 17px);
+  line-height: 1.95;
+}
+
+/* ── Row lists (recognition, education) ── */
+
+.ab-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--ab-line);
+}
+
+.ab-rows > li {
+  border-top: 1px solid var(--ab-line);
+}
+
+.ab-award {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.9fr) minmax(0, 1.6fr) auto;
+  gap: clamp(24px, 4vw, 70px);
+  align-items: baseline;
+  padding: clamp(34px, 3.4vw, 52px) clamp(5px, 2.5vw, 45px);
+}
+
+.ab-award-rank {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ab-award-num {
+  font-size: clamp(40px, 4.4vw, 74px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), color 0.45s;
+}
+
+.ab-award-scope,
+.ab-award-year {
+  font-size: 14px;
+  color: var(--ab-muted);
+}
+
+.ab-award-body h3 {
+  margin: 0;
+  font-size: clamp(22px, 1.75vw, 30px);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.ab-award-body p {
+  max-width: 52ch;
+  margin: 12px 0 0;
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.66;
+  color: var(--ab-muted);
+}
+
+.ab-award-year {
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ab-award:hover .ab-award-num {
+    color: #888;
+    transform: translateX(-10px);
+  }
+}
+
+.ab-edu {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  gap: clamp(20px, 3vw, 56px);
+  align-items: center;
+  padding: clamp(28px, 2.8vw, 42px) clamp(5px, 2.5vw, 45px);
+}
+
+.ab-edu-logo {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--ab-line);
+  border-radius: 50%;
+}
+
+.ab-edu-logo img {
+  width: 76%;
+  height: 76%;
+  object-fit: contain;
+}
+
+.ab-edu-main h3 {
+  margin: 0;
+  font-size: clamp(20px, 1.6vw, 27px);
+  font-weight: 450;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.ab-edu-main p,
+.ab-edu-inst p {
+  margin: 6px 0 0;
+  font-size: clamp(15px, 1.05vw, 17px);
+}
+
+.ab-edu-main p {
+  color: var(--ab-muted);
+}
+
+.ab-edu-inst p {
+  margin: 0;
+}
+
+.ab-edu-inst span,
+.ab-edu-period {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--ab-muted);
+}
+
+.ab-edu-period {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* The last band runs straight into the dark contact section. */
+.ab-band.is-last {
+  padding-bottom: clamp(140px, 15vw, 240px);
+}
+
+/* ── Tablet ── */
+
+@media (max-width: 1100px) {
+  .ab-columns.is-three {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ab-edu {
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+  }
+
+  .ab-edu-logo {
+    width: 56px;
+    height: 56px;
+  }
+
+  .ab-edu-inst {
+    grid-column: 2 / 3;
+    grid-row: 2;
+  }
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 760px) {
+  .about-lux-main {
+    --ab-gutter: 22px;
+    --ab-gutter-medium: 22px;
+  }
+
+  .ab-hero {
+    padding-top: 96px;
+  }
+
+  .ab-display {
+    /* Each headline line stays on a single row. */
+    font-size: min(54px, calc((100vw - 48px) / 9.4));
+  }
+
+  .ab-globe-line {
+    margin-top: 96px;
+  }
+
+  .ab-globe-badge {
+    right: 36px;
+  }
+
+  .ab-hero-arrow {
+    margin-top: 84px;
+  }
+
+  .ab-intro-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ab-intro-copy > p {
+    max-width: none;
+  }
+
+  .ab-facts {
+    max-width: none;
+  }
+
+  .ab-columns.is-two {
+    grid-template-columns: 1fr;
+  }
+
+  .ab-award {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px 16px;
+    padding-inline: 0;
+  }
+
+  .ab-award-rank {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 14px;
+  }
+
+  .ab-award-body {
+    grid-column: 1 / -1;
+  }
+
+  .ab-award-year {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .ab-edu {
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: start;
+    padding-inline: 0;
+  }
+
+  .ab-edu-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .ab-edu-inst,
+  .ab-edu-period {
+    grid-column: 2;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .ab-columns.is-three {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 22px;
+  }
+
+  .ab-columns.is-three .ab-col-title {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ab-dot {
+    animation: none;
+  }
+
+  .ab-award-num {
+    transition: none;
+  }
+}
