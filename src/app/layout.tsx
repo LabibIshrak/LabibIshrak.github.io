@@ -20,6 +20,7 @@ const bengali = Noto_Sans_Bengali({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ishraklabib.me"),
   title: {
     default: "Hasin Ishrak Labib — Software Developer",
     template: "%s — Labib",
