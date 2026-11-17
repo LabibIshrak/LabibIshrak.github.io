@@ -37,7 +37,7 @@ const greetings = [
   "Bonjour",
   "Hola",
   "こんにちは",
-  "নমস্কার",
+  "সালাম",
 ];
 
 function prefersReducedMotion() {
