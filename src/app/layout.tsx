@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_Bengali, Outfit } from "next/font/google";
+import { Hanken_Grotesk, Noto_Sans_Bengali } from "next/font/google";
 import { Runtime } from "@/components/runtime";
 import { bootScript } from "@/lib/boot";
 import "./globals.css";
 import "./editorial.css";
 
-// Outfit is a variable font: omitting `weight` serves one variable file
-// that covers every weight instead of separate static files.
-const outfit = Outfit({
+// Hanken Grotesk is a variable font: omitting `weight` serves one file
+// covering every weight, so the in-between 450 "book" weight works.
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-outfit",
+  variable: "--font-sans",
 });
 
 const bengali = Noto_Sans_Bengali({
@@ -39,7 +39,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     // The boot script adds classes to <html> before hydration.
-    <html lang="en" className={`${outfit.variable} ${bengali.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${bengali.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
