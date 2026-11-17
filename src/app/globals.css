@@ -437,15 +437,6 @@ button:focus-visible,
   font-family: var(--sans);
 }
 
-.artwork-caption {
-  position: absolute;
-  bottom: 10px;
-  left: 12px;
-  color: rgb(0 0 0 / 55%);
-  font-size: 7px;
-  letter-spacing: 0.1em;
-}
-
 /* Contact transition (warp tunnel) */
 
 .contact-warp {

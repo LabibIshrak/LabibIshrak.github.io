@@ -4,7 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { TransitionLink } from "./runtime";
 
-export function Navigation() {
+type NavigationProps = {
+  /** Where "Contact" scrolls to: the warp, or the footer on inner pages. */
+  contactHref?: string;
+};
+
+export function Navigation({ contactHref = "#contact-intro" }: NavigationProps) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -35,7 +40,7 @@ export function Navigation() {
       <nav className="desktop-navigation" aria-label="Main navigation">
         <TransitionLink href="/about" data-magnetic>About</TransitionLink>
         <a href="/#work" data-magnetic>Work</a>
-        <a href="#contact-intro" data-magnetic>
+        <a href={contactHref} data-magnetic>
           Contact <ArrowUpRight size={15} />
         </a>
       </nav>
@@ -65,7 +70,7 @@ export function Navigation() {
           Work
           <ArrowUpRight />
         </a>
-        <a href="#contact-intro" onClick={() => setOpen(false)}>
+        <a href={contactHref} onClick={() => setOpen(false)}>
           Contact
           <ArrowUpRight />
         </a>
