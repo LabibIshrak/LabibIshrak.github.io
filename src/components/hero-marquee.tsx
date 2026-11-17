@@ -1,10 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 const NAME = "Hasin Ishrak Labib";
 
@@ -129,8 +126,16 @@ export function HeroMarquee() {
         },
       });
 
+      // Skip work while the hero is scrolled out of view.
+      let inView = true;
+      const visibility = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+      });
+      visibility.observe(root);
+
       const tick = (_time: number, deltaMilliseconds: number) => {
         if (
+          !inView ||
           groupWidth <= 0 ||
           document.visibilityState === "hidden"
         ) {
@@ -157,6 +162,7 @@ export function HeroMarquee() {
 
       return () => {
         observer.disconnect();
+        visibility.disconnect();
         trigger.kill();
         idleTimer.kill();
         gsap.ticker.remove(tick);

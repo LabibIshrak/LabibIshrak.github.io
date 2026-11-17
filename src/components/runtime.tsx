@@ -329,7 +329,12 @@ function Cursor() {
   );
 }
 
-type TransitionLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
+/** Curtain-transition navigation for components that need to delay it. */
+export function useTransitionNavigate() {
+  return useContext(NavigationContext);
+}
+
+type TransitionLinkProps =Omit<ComponentProps<typeof Link>, "href"> & {
   href: string;
 };
 
