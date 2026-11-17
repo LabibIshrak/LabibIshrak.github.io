@@ -40,12 +40,12 @@ const experiences = [
 
 const achievements = [
   {
-    rank: "4th",
-    scope: "Nationally",
+    rank: "1st",
+    scope: "Engineering Solution",
     title: "July Hackathon 2026",
     year: "2026",
     description:
-      "Secured 4th place nationally, competing against teams from top universities across Bangladesh.",
+      "Won 1st place in the Engineering Solution category and finished 4th nationally overall, competing against teams from top universities across Bangladesh.",
   },
   {
     rank: "Finalist",
@@ -57,11 +57,11 @@ const achievements = [
   },
   {
     rank: "3×",
-    scope: "Champion",
+    scope: "Language & Literature",
     title: "Creative Talent Hunt",
     year: "2018 — 2021",
     description:
-      "Regional Championship winner for three consecutive years, holding the title from 2018 to 2021.",
+      "Regional Champion in Language & Literature — Bangla and English — for three consecutive years, holding the title from 2018 to 2021.",
   },
 ];
 
@@ -212,26 +212,24 @@ export default function AboutPage() {
           {/* ── Achievements ── */}
           <section className="ab-section" id="achievements">
             <div className="ab-wrap">
-              <div className="ab-section-head" data-ab-reveal>
-                <h2 className="ab-heading">Recognition</h2>
-                <span className="ab-count">{pad(achievements.length)}</span>
-              </div>
+              <h2 className="ab-heading" data-ab-reveal>
+                Recognition
+              </h2>
 
-              <ul className="ab-rows">
-                {achievements.map((ach) => (
-                  <li className="ab-award" key={ach.title} data-ab-reveal>
-                    <div className="ab-award-rank">
-                      <span className="ab-award-num">{ach.rank}</span>
-                      <span className="ab-award-scope">{ach.scope}</span>
-                    </div>
-                    <div className="ab-award-body">
-                      <h3>{ach.title}</h3>
-                      <p>{ach.description}</p>
-                    </div>
-                    <span className="ab-award-year">{ach.year}</span>
+              <ol className="ab-columns is-three ab-awards">
+                {achievements.map((ach, i) => (
+                  <li className="ab-col ab-award" key={ach.title} data-ab-reveal>
+                    <h5 className="ab-index">
+                      <span>{pad(i + 1)}</span>
+                      <span>{ach.year}</span>
+                    </h5>
+                    <span className="ab-award-num">{ach.rank}</span>
+                    <span className="ab-award-scope">{ach.scope}</span>
+                    <h3 className="ab-col-title">{ach.title}</h3>
+                    <p className="ab-col-text">{ach.description}</p>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
           </section>
 
