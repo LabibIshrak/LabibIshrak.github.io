@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { TransitionLink } from "@/components/runtime";
-import { AboutPageAnimations, SplitWords } from "@/components/about-page-animations";
-import { profile } from "@/lib/content";
+import { RotatingGlobe } from "@/components/rotating-globe";
+import { AboutPageAnimations } from "@/components/about-page-animations";
+import "./about.css";
 
 export const metadata: Metadata = {
   title: "About",
   description:
     "Hasin Ishrak Labib — Co-founder & CEO of Vantaloc, CSE undergraduate at PUST, full-stack developer, and builder based in Bangladesh.",
 };
-
-const statement =
-  "Building real products. Shipping software that works. Leading teams that move fast. Based in Bangladesh.";
 
 /* ─── Data ─────────────────────────────────────────────────────── */
 
@@ -24,7 +21,6 @@ const experiences = [
     company: "Vantaloc",
     type: "Full-time · SaaS",
     period: "2025 — Present",
-    location: "Bangladesh",
     description:
       "Co-founded and lead Vantaloc — a SaaS company building websites, AI agents, custom software, and Android applications for clients. End-to-end ownership: strategy, architecture, hiring, delivery.",
     skills: ["SaaS", "AI Agents", "Next.js", "Flutter", "Android", "Leadership"],
@@ -34,7 +30,6 @@ const experiences = [
     company: "Mezai Tech",
     type: "Part-time · Digital Services",
     period: "2025 — Present",
-    location: "Bangladesh",
     description:
       "Driving product at Mezai Tech, a digital service provider. Setting roadmaps, leading cross-functional squads, and shipping digital solutions that clients actually use.",
     skills: ["Product Strategy", "Team Leadership", "Agile", "Digital Services"],
@@ -52,19 +47,19 @@ const achievements = [
   },
   {
     rank: "Finalist",
-    scope: "",
-    title: "PSTU Hackathon Final",
+    scope: "Grand final",
+    title: "PSTU Hackathon 2026",
     year: "2026",
     description:
-      "Reached the grand final of PSTU Hackathon 2026 — built and presented a full working product under pressure.",
+      "Reached the grand final — built and presented a full working product under pressure.",
   },
   {
     rank: "3×",
     scope: "Champion",
     title: "Creative Talent Hunt",
-    year: "2018 – 2021",
+    year: "2018 — 2021",
     description:
-      "Regional Championship Winner for three consecutive years. Held the title from 2018 to 2021.",
+      "Regional Championship winner for three consecutive years, holding the title from 2018 to 2021.",
   },
 ];
 
@@ -73,7 +68,6 @@ const education = [
     degree: "B.Sc. Engineering",
     field: "Computer Science & Engineering",
     institution: "Pabna University of Science and Technology",
-    short: "PUST",
     period: "2024 — Present",
     location: "Pabna, Bangladesh",
     logo: "/pust-logo.png",
@@ -82,21 +76,22 @@ const education = [
     degree: "Higher Secondary Certificate",
     field: "Science Group",
     institution: "Rajshahi College",
-    short: "RC",
     period: "2021 — 2023",
     location: "Rajshahi, Bangladesh",
-    logo: "/rajshahi-college-logo.png",
+    logo: "/rajshahi-college-logo.svg",
   },
 ];
 
 const techStacks = [
-  { category: "Languages",      items: ["C++", "Python", "TypeScript", "JavaScript", "Dart", "Java", "SQL"] },
-  { category: "Frontend",       items: ["React", "Next.js", "HTML5", "CSS3", "GSAP", "Framer Motion"] },
-  { category: "Mobile",         items: ["Flutter", "Dart", "Firebase", "Android SDK"] },
-  { category: "Backend",        items: ["Node.js", "Express", "REST APIs", "PostgreSQL", "MongoDB"] },
-  { category: "AI / ML",        items: ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy"] },
+  { category: "Languages", items: ["C++", "Python", "TypeScript", "JavaScript", "Dart", "Java", "SQL"] },
+  { category: "Frontend", items: ["React", "Next.js", "HTML5", "CSS3", "GSAP", "Framer Motion"] },
+  { category: "Mobile", items: ["Flutter", "Dart", "Firebase", "Android SDK"] },
+  { category: "Backend", items: ["Node.js", "Express", "REST APIs", "PostgreSQL", "MongoDB"] },
+  { category: "AI / ML", items: ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy"] },
   { category: "Tools & DevOps", items: ["Git", "GitHub", "Docker", "Linux", "Figma", "VS Code"] },
 ];
+
+const pad = (n: number) => String(n).padStart(2, "0");
 
 /* ─── Page ──────────────────────────────────────────────────────── */
 
@@ -107,219 +102,177 @@ export default function AboutPage() {
         <Navigation />
 
         <AboutPageAnimations>
+          {/* ── Hero ── */}
+          <section className="ab-hero">
+            <div className="ab-wrap is-medium">
+              <h1 className="ab-display" data-page-heading tabIndex={-1}>
+                <span className="ab-line"><span>Building real products</span></span>
+                <span className="ab-line"><span>with code that ships</span></span>
+              </h1>
+            </div>
 
-          {/* ── HERO ──────────────────────────────────── */}
-          <section className="alux-hero">
-            <div className="alux-hero-inner">
-              <TransitionLink href="/" className="alux-back">
-                <ArrowLeft size={16} />
-                <span>Home</span>
-              </TransitionLink>
+            <div className="ab-globe-line">
+              <span className="ab-rule" data-ab-rule />
+              <div className="ab-globe-badge" data-ab-globe>
+                <RotatingGlobe />
+              </div>
+            </div>
 
-              <div className="alux-hero-text">
-                <p className="alux-eyebrow">About</p>
-                <h1 className="alux-h1" data-page-heading tabIndex={-1}>
-                  <span className="alux-h1-line">Hasin</span>
-                  <span className="alux-h1-line alux-h1-italic">Ishrak</span>
-                  <span className="alux-h1-line">Labib</span>
-                </h1>
+            <div className="ab-wrap is-medium">
+              <ArrowDownRight className="ab-hero-arrow" strokeWidth={1.25} aria-hidden="true" />
+            </div>
+          </section>
+
+          {/* ── Intro + portrait ── */}
+          <section className="ab-intro">
+            <div className="ab-wrap is-medium ab-intro-grid">
+              <div className="ab-intro-copy">
+                <p data-ab-reveal>
+                  I&apos;m a second-year Computer Science &amp; Engineering
+                  undergraduate at PUST, co-founder and CEO of Vantaloc, and
+                  Product Lead at Mezai Tech. I build websites, AI agents,
+                  software and Android apps — and I care about the details
+                  that make them feel right.
+                </p>
+                <p className="ab-muted" data-ab-reveal>
+                  Problem solver. Always building.
+                </p>
+
+                <dl className="ab-facts" data-ab-reveal>
+                  <div>
+                    <dt>Role</dt>
+                    <dd>Founder · Developer</dd>
+                  </div>
+                  <div>
+                    <dt>Based in</dt>
+                    <dd>Bangladesh</dd>
+                  </div>
+                  <div>
+                    <dt>Status</dt>
+                    <dd className="ab-available">
+                      <span className="ab-dot" aria-hidden="true" />
+                      Available for work
+                    </dd>
+                  </div>
+                </dl>
               </div>
 
-              <div className="alux-hero-meta">
-                <div className="alux-meta-col">
-                  <span className="alux-meta-label">Role</span>
-                  <span className="alux-meta-val">Founder · Developer</span>
+              <figure className="ab-portrait" data-ab-portrait>
+                <div className="ab-portrait-inner">
+                  <Image
+                    src="/portrait.png"
+                    alt="Hasin Ishrak Labib"
+                    fill
+                    sizes="(max-width: 900px) 90vw, 40vw"
+                    className="ab-portrait-img"
+                    priority
+                  />
                 </div>
-                <div className="alux-meta-col">
-                  <span className="alux-meta-label">Based in</span>
-                  <span className="alux-meta-val">Bangladesh</span>
-                </div>
-                <div className="alux-meta-col">
-                  <span className="alux-meta-label">Status</span>
-                  <span className="alux-meta-val alux-available">
-                    <span className="alux-dot" />
-                    Available for work
-                  </span>
-                </div>
+              </figure>
+            </div>
+          </section>
+
+          {/* ── Experience ── */}
+          <section className="ab-band" id="experience">
+            <div className="ab-wrap">
+              <h2 className="ab-heading" data-ab-reveal>
+                Where I&apos;m building …
+              </h2>
+
+              <div className="ab-columns is-two">
+                {experiences.map((exp, i) => (
+                  <article className="ab-col" key={exp.company} data-ab-reveal>
+                    <h5 className="ab-index">{pad(i + 1)}</h5>
+                    <h3 className="ab-col-title">{exp.title}</h3>
+                    <p className="ab-col-sub">
+                      {exp.company} <span>· {exp.type}</span>
+                    </p>
+                    <p className="ab-col-meta">{exp.period}</p>
+                    <p className="ab-col-text">{exp.description}</p>
+                    <p className="ab-col-tags">{exp.skills.join("  /  ")}</p>
+                  </article>
+                ))}
               </div>
             </div>
           </section>
 
-          {/* ── INTRO + PHOTO ─────────────────────────── */}
-          <section className="alux-intro">
-            <div className="alux-intro-photo">
-              <Image
-                src="/portrait-placeholder.png"
-                alt="Hasin Ishrak Labib"
-                fill
-                sizes="(max-width: 900px) 100vw, 45vw"
-                className="alux-intro-img"
-                priority
-              />
-              <span className="alux-photo-tag">Labib, 2025</span>
-            </div>
+          {/* ── Achievements ── */}
+          <section className="ab-section" id="achievements">
+            <div className="ab-wrap">
+              <div className="ab-section-head" data-ab-reveal>
+                <h2 className="ab-heading">Recognition</h2>
+                <span className="ab-count">{pad(achievements.length)}</span>
+              </div>
 
-            <div className="alux-intro-content">
-              <p className="alux-statement">
-                <SplitWords text={statement} />
-              </p>
-
-              <p className="alux-bio">
-                Second-year Computer Science & Engineering undergraduate at PUST.
-                Co-founder and CEO of <strong>Vantaloc</strong> — a SaaS company
-                delivering websites, AI agents, software, and Android apps to
-                clients. Product Lead at <strong>Mezai Tech</strong>. Competitive
-                programmer. Former three-time regional champion.
-              </p>
-
-              {profile.email && (
-                <a className="alux-email-cta" href={`mailto:${profile.email}`}>
-                  <span>{profile.email}</span>
-                  <ArrowUpRight size={16} />
-                </a>
-              )}
-            </div>
-          </section>
-
-          {/* ── EXPERIENCE ────────────────────────────── */}
-          <section className="alux-section" id="experience">
-            <header className="alux-section-head">
-              <span className="alux-eyebrow">Experience</span>
-              <span className="alux-section-count">{String(experiences.length).padStart(2, "0")}</span>
-            </header>
-
-            <div className="alux-timeline">
-              {experiences.map((exp, i) => (
-                <div className="alux-tl-row" key={i}>
-                  <div className="alux-tl-left">
-                    <span className="alux-tl-period">{exp.period}</span>
-                    <span className="alux-tl-location">{exp.location}</span>
-                  </div>
-
-                  <div className="alux-tl-track">
-                    <span className="alux-tl-dot" />
-                    {i < experiences.length - 1 && <span className="alux-tl-line" />}
-                  </div>
-
-                  <div className="alux-tl-body">
-                    <div className="alux-tl-top">
-                      <h3 className="alux-tl-title">{exp.title}</h3>
-                      <span className="alux-tl-badge">{exp.type}</span>
+              <ul className="ab-rows">
+                {achievements.map((ach) => (
+                  <li className="ab-award" key={ach.title} data-ab-reveal>
+                    <div className="ab-award-rank">
+                      <span className="ab-award-num">{ach.rank}</span>
+                      <span className="ab-award-scope">{ach.scope}</span>
                     </div>
-                    <p className="alux-tl-company">{exp.company}</p>
-                    <p className="alux-tl-desc">{exp.description}</p>
-                    <ul className="alux-tl-tags">
-                      {exp.skills.map((s, si) => (
-                        <li key={si}>{s}</li>
+                    <div className="ab-award-body">
+                      <h3>{ach.title}</h3>
+                      <p>{ach.description}</p>
+                    </div>
+                    <span className="ab-award-year">{ach.year}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {/* ── Education ── */}
+          <section className="ab-section is-tight" id="education">
+            <div className="ab-wrap">
+              <div className="ab-section-head" data-ab-reveal>
+                <h2 className="ab-heading">Education</h2>
+                <span className="ab-count">{pad(education.length)}</span>
+              </div>
+
+              <ul className="ab-rows">
+                {education.map((edu) => (
+                  <li className="ab-edu" key={edu.institution} data-ab-reveal>
+                    <div className="ab-edu-logo">
+                      <Image src={edu.logo} alt="" width={64} height={64} />
+                    </div>
+                    <div className="ab-edu-main">
+                      <h3>{edu.degree}</h3>
+                      <p>{edu.field}</p>
+                    </div>
+                    <div className="ab-edu-inst">
+                      <p>{edu.institution}</p>
+                      <span>{edu.location}</span>
+                    </div>
+                    <span className="ab-edu-period">{edu.period}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+
+          {/* ── Toolbox ── */}
+          <section className="ab-band is-last" id="tech">
+            <div className="ab-wrap">
+              <h2 className="ab-heading" data-ab-reveal>
+                What I work with …
+              </h2>
+
+              <div className="ab-columns is-three">
+                {techStacks.map((cat, i) => (
+                  <div className="ab-col" key={cat.category} data-ab-reveal>
+                    <h5 className="ab-index">{pad(i + 1)}</h5>
+                    <h3 className="ab-col-title">{cat.category}</h3>
+                    <ul className="ab-stack">
+                      {cat.items.map((item) => (
+                        <li key={item}>{item}</li>
                       ))}
                     </ul>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </section>
-
-          {/* ── ACHIEVEMENTS ──────────────────────────── */}
-          <section className="alux-section" id="achievements">
-            <header className="alux-section-head">
-              <span className="alux-eyebrow">Achievements</span>
-              <span className="alux-section-count">{String(achievements.length).padStart(2, "0")}</span>
-            </header>
-
-            <div className="alux-awards">
-              {achievements.map((ach, i) => (
-                <div className="alux-award-row" key={i}>
-                  <div className="alux-award-rank">
-                    <span className="alux-award-num">{ach.rank}</span>
-                    {ach.scope && <span className="alux-award-scope">{ach.scope}</span>}
-                  </div>
-                  <div className="alux-award-body">
-                    <div className="alux-award-top">
-                      <h3 className="alux-award-title">{ach.title}</h3>
-                      <span className="alux-award-year">{ach.year}</span>
-                    </div>
-                    <p className="alux-award-desc">{ach.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── EDUCATION ─────────────────────────────── */}
-          <section className="alux-section" id="education">
-            <header className="alux-section-head">
-              <span className="alux-eyebrow">Education</span>
-              <span className="alux-section-count">{String(education.length).padStart(2, "0")}</span>
-            </header>
-
-            <div className="alux-edu-list">
-              {education.map((edu, i) => (
-                <div className="alux-edu-row" key={i}>
-                  <div className="alux-edu-logo-wrap">
-                    <Image
-                      src={edu.logo}
-                      alt={edu.institution}
-                      width={56}
-                      height={56}
-                      className="alux-edu-logo"
-                    />
-                  </div>
-                  <div className="alux-edu-body">
-                    <div className="alux-edu-top">
-                      <div>
-                        <h3 className="alux-edu-degree">
-                          {edu.degree}
-                          <span className="alux-edu-field"> — {edu.field}</span>
-                        </h3>
-                        <p className="alux-edu-inst">{edu.institution}</p>
-                      </div>
-                      <div className="alux-edu-right">
-                        <span className="alux-edu-period">{edu.period}</span>
-                        <span className="alux-edu-loc">{edu.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── TECH STACKS ───────────────────────────── */}
-          <section className="alux-section" id="tech">
-            <header className="alux-section-head">
-              <span className="alux-eyebrow">Tech Stacks</span>
-              <span className="alux-section-count">{String(techStacks.length).padStart(2, "0")}</span>
-            </header>
-
-            <div className="alux-tech-grid">
-              {techStacks.map((cat, i) => (
-                <div className="alux-tech-col" key={i}>
-                  <h4 className="alux-tech-cat">{cat.category}</h4>
-                  <ul className="alux-tech-list">
-                    {cat.items.map((item, ti) => (
-                      <li key={ti}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* ── CTA ───────────────────────────────────── */}
-          <section className="alux-cta">
-            <p className="alux-cta-label">Get in touch</p>
-            <h2 className="alux-cta-heading">
-              Let&apos;s build<br />
-              something real.
-            </h2>
-            {profile.email && (
-              <a className="alux-cta-link" href={`mailto:${profile.email}`}>
-                <span>{profile.email}</span>
-                <ArrowUpRight size={20} />
-              </a>
-            )}
-          </section>
-
         </AboutPageAnimations>
       </main>
 
