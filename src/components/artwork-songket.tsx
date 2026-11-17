@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
+import { useId } from "react";
+import { keyTimes, useSvgTimeline } from "./use-svg-timeline";
 
 /**
  * Songket showpiece in the app's own colours (Bangladesh green and red).
@@ -55,8 +56,6 @@ const packets = [
   { path: "M690 118L702 336L400 300", start: 0.4, end: 0.56, from: "mina" },
   { path: "M400 300L604 498", start: 0.64, end: 0.76, from: "phone" },
 ];
-
-const keyTimes = (...t: number[]) => t.map((v) => v.toFixed(3)).join(";");
 
 function Reveal({ at, children }: { at: number; children: React.ReactNode }) {
   const kt = keyTimes(0, at, at + 0.03, FADE_OUT, FADE_OUT + 0.04, 1);
@@ -121,48 +120,10 @@ function Pulse({ x, y, at }: { x: number; y: number; at: number }) {
 const waveform = [5, 9, 14, 8, 17, 11, 6, 13, 18, 10, 7, 12, 15, 8, 5, 10, 13, 6];
 
 export function SongketArtwork({ title }: { title: string }) {
-  const svgRef = useRef<SVGSVGElement>(null);
+  // Still frame (reduced motion): every message on screen.
+  const svgRef = useSvgTimeline(LOOP * 0.8);
   const uid = useId().replace(/:/g, "");
   const id = (name: string) => `sk-${name}-${uid}`;
-
-  useEffect(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let inView = false;
-
-    function sync() {
-      if (!svg) return;
-      if (reduce.matches) {
-        // A still frame with every message on screen.
-        svg.setCurrentTime(LOOP * 0.8);
-        svg.pauseAnimations();
-        return;
-      }
-      if (inView && document.visibilityState === "visible") {
-        svg.unpauseAnimations();
-      } else {
-        svg.pauseAnimations();
-      }
-    }
-
-    const observer = new IntersectionObserver(([entry]) => {
-      inView = entry.isIntersecting;
-      sync();
-    });
-
-    observer.observe(svg);
-    document.addEventListener("visibilitychange", sync);
-    reduce.addEventListener("change", sync);
-    sync();
-
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", sync);
-      reduce.removeEventListener("change", sync);
-    };
-  }, []);
 
   const S = { x: 312, y: 84, w: 176, h: 442 }; // phone screen
 

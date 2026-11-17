@@ -366,7 +366,7 @@
 .cs-live {
   position: absolute;
   top: 0;
-  right: clamp(20px, 21%, 360px);
+  right: clamp(20px, 30%, 520px);
   z-index: 2;
   display: grid;
   width: clamp(112px, 11vw, 176px);
@@ -720,10 +720,12 @@
     margin-top: 96px;
   }
 
+  /* Centred on the top edge, clear of the artwork's corner captions. */
   .cs-live {
-    right: 18px;
+    right: 50%;
     width: 100px;
     font-size: 13px;
+    translate: 50% -50%;
   }
 
   .cs-text-grid {

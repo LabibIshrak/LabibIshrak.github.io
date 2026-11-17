@@ -140,6 +140,7 @@ export default async function ProjectPage({ params }: Props) {
               )}
 
               {/* ── Stack + demo ── */}
+              {(project.stack || project.video || project.links) && (
               <section className="cs-tech">
                 <div className="wk-wrap cs-tech-grid">
                   {project.stack && (
@@ -159,7 +160,10 @@ export default async function ProjectPage({ params }: Props) {
                   {project.video && (
                     <div className="cs-video">
                       <h2 className="cs-label">See it running</h2>
-                      <div className="cs-video-frame">
+                      <div
+                        className="cs-video-frame"
+                        style={{ aspectRatio: project.video.aspect ?? "16 / 9" }}
+                      >
                         <YouTubeEmbed id={project.video.id} title={project.video.title} />
                       </div>
                     </div>
@@ -186,6 +190,7 @@ export default async function ProjectPage({ params }: Props) {
                   </div>
                 )}
               </section>
+              )}
             </>
           ) : (
             <section className="cs-text">
