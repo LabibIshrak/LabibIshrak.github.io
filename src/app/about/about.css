@@ -227,8 +227,8 @@
 }
 
 .ab-portrait-img {
-  object-fit: contain;
-  object-position: center bottom;
+  object-fit: cover;
+  object-position: 55% 60%;
 }
 
 /* ── Shared section type ── */
@@ -300,6 +300,21 @@
   font-weight: 450;
   line-height: 1.3;
   letter-spacing: -0.01em;
+}
+
+/* Company mark beside the role, same round frame as the school crests. */
+.ab-exp-head {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 1.4vw, 22px);
+}
+
+.ab-exp-logo {
+  flex-shrink: 0;
+  width: clamp(46px, 3.6vw, 56px);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 
 .ab-col-sub {
