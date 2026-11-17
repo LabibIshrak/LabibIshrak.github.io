@@ -1,7 +1,25 @@
 import type { Project } from "@/lib/content";
 import { SongketArtwork } from "./artwork-songket";
+import { LunarArtwork } from "./artwork-lunar";
+import { CalcrexArtwork } from "./artwork-calcrex";
 
 export function ProjectArtwork({ project }: { project: Project }) {
+  if (project.artwork === "lunar") {
+    return (
+      <div className="project-artwork artwork-lunar" style={{ backgroundColor: project.color }}>
+        <LunarArtwork title={project.title} />
+      </div>
+    );
+  }
+
+  if (project.artwork === "calcrex") {
+    return (
+      <div className="project-artwork artwork-calcrex" style={{ backgroundColor: project.color }}>
+        <CalcrexArtwork title={project.title} />
+      </div>
+    );
+  }
+
   if (project.artwork === "songket") {
     return (
       <div className="project-artwork artwork-songket" style={{ backgroundColor: project.color }}>

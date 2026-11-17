@@ -33,7 +33,7 @@ export type Project = {
   kind: ProjectKind;
   year?: string;
   color: string;
-  artwork: "songket" | "recipe" | "fitness" | "system" | "emblem";
+  artwork: "songket" | "lunar" | "calcrex" | "recipe" | "fitness" | "system" | "emblem";
   introduction: string;
   focus: string[];
 
@@ -45,7 +45,8 @@ export type Project = {
   problem?: string;
   features?: { title: string; text: string }[];
   stack?: [string, string][];
-  video?: { id: string; title: string };
+  /** YouTube video; aspect is the player shape, e.g. "16 / 9". */
+  video?: { id: string; title: string; aspect?: string };
 };
 
 export const projects: Project[] = [
@@ -62,11 +63,7 @@ export const projects: Project[] = [
     artwork: "songket",
     award: "Winner — July Hackathon 2026 · Best project nationally",
     location: "Bangladesh",
-    credits: [
-      "Team: Binary Bandits",
-      "Branding: Hasin Ishrak Labib",
-      "Development: Tijul Kabir",
-    ],
+    credits: ["Team Binary Bandits"],
     links: [
       { label: "GitHub", href: "https://github.com/BinaryBandits-Hackathon/songket" },
       { label: "Watch demo", href: "https://youtu.be/ezjVDFpkaeY" },
@@ -110,12 +107,118 @@ export const projects: Project[] = [
       ["Cryptography", "BouncyCastle: X25519, Ed25519, AES-256-GCM"],
       ["Storage", "EncryptedSharedPreferences"],
     ],
-    video: { id: "ezjVDFpkaeY", title: "Songket: decentralized offline mesh messaging demo" },
+    video: { id: "ezjVDFpkaeY", title: "Songket: decentralized offline mesh messaging demo", aspect: "1 / 1" },
+    focus: [],
+  },
+  {
+    slug: "lunar-life",
+    number: "02",
+    title: "Lunar Life",
+    role: "Design & Development",
+    category: "Educational game",
+    technology: "TypeScript · React 19 · Vite · SVG",
+    kind: "Development",
+    year: "2026",
+    color: "#0b0b0c",
+    artwork: "lunar",
+    award: "NASA Space Apps Challenge 2026 · Junior Astronaut Mission Trainer",
+    location: "Bangladesh",
+    credits: ["Team Binary Bandits"],
+    links: [
+      { label: "Play now", href: "https://nasa-hack-26.pages.dev" },
+      { label: "GitHub", href: "https://github.com/BinaryBandits-Hackathon/lunar-lifeline" },
+      { label: "Watch trailer", href: "https://youtu.be/CDM39_Nv56k" },
+    ],
+    introduction:
+      "Lunar Life makes kids aged 7 to 12 the commander of a 14-sol mission on Mars. Twelve hard choices, each with a real cost in fuel, time and crew health, and every danger drawn from real NASA data. Kids don't memorise facts; they use them to bring their crew home. It runs in any browser, in English and Bangla, with nothing to install.",
+    problem:
+      "Space science feels distant to kids. They read about radiation and dust storms, but never feel why astronauts care, and millions of children in Bangladesh rarely get a science game in their own language at all. NASA's challenge asked for a junior astronaut trainer. We built one where the trade-offs are real.",
+    features: [
+      {
+        title: "Real NASA data",
+        text: "Solar storms come from NASA's DONKI space-weather records, with real dates and strengths. Radiation doses use what the Curiosity rover measured on the Martian surface.",
+      },
+      {
+        title: "Choices that matter",
+        text: "A hidden model tracks fuel, time and crew health. We tested all 4,096 possible paths: only about 41% get home, and every one of the 12 decisions can change the ending.",
+      },
+      {
+        title: "Every fact is sourced",
+        text: "Each fact card links to the NASA page it comes from, from InSight to MOXIE, and automated tests make sure the links are there.",
+      },
+      {
+        title: "A crew worth saving",
+        text: "Mei the doctor, Tunde the engineer and Pip the robot chat, joke and get interrupted by disasters, so kids want to see the story through.",
+      },
+      {
+        title: "Learning after the ending",
+        text: "The debrief shows the one choice that flipped your ending, what each decision cost, and your radiation dose against NASA's career limit.",
+      },
+      {
+        title: "Made for every kid",
+        text: "A full Bangla version, read-aloud, reduced motion, keyboard play and large text. No accounts, ads or tracking, and it works offline once loaded.",
+      },
+    ],
+    stack: [
+      ["Language", "TypeScript"],
+      ["Framework", "React 19, Vite"],
+      ["Graphics", "Hand-coded inline SVG, no image assets"],
+      ["Audio", "Synthesised live with the Web Audio API"],
+      ["Data", "NASA DONKI space-weather records via api.nasa.gov"],
+      ["Testing", "Vitest: 100+ tests across all 4,096 paths"],
+      ["Hosting", "Cloudflare Pages, installable and offline-ready"],
+    ],
+    video: { id: "CDM39_Nv56k", title: "Lunar Lifeline trailer, NASA Space Apps 2026", aspect: "16 / 9" },
+    focus: [],
+  },
+  {
+    slug: "calcrex",
+    number: "03",
+    title: "Calcrex",
+    role: "Design & Development",
+    category: "Calculator app",
+    technology: "Android · Graphing · AI solver",
+    kind: "Development",
+    year: "2025",
+    color: "#121317",
+    artwork: "calcrex",
+    award: "Solo project · Scientific, graphing and AI in one app",
+    location: "Bangladesh",
+    introduction:
+      "Calcrex is a modern scientific calculator built to be the only one you need. It handles every kind of scientific calculation, plots graphs the way Desmos does, and solves problems step by step with built-in AI, the way Wolfram Alpha does. Point the camera at a problem and it reads it for you. And there are no ads, ever.",
+    problem:
+      "Phone calculators stop at the basics. So students end up juggling three apps: one for scientific work, a graphing site for plots and a solver for anything harder, most of them stuffed with ads. Calcrex puts all of it into one clean, ad-free app.",
+    features: [
+      {
+        title: "Full scientific mode",
+        text: "A clean everyday keypad that opens into trig and inverse functions, powers, roots, logs, factorials, absolute value, π and e, with extra pages of functions behind the 1st key.",
+      },
+      {
+        title: "Graphs like Desmos",
+        text: "Plot several functions at once, f1, f2 and more, including equations in x and y such as x² + y² − 4 for a circle. Zoom, recentre and go full screen, with a keyboard built for graphing.",
+      },
+      {
+        title: "Scan a problem",
+        text: "Take a photo or pick one from the gallery. Calcrex reads the expression, lets you fix it if needed, and solves it.",
+      },
+      {
+        title: "AI that shows its work",
+        text: "Ask a maths question and the built-in AI solves it step by step, so you learn how to get the answer, not just what it is.",
+      },
+      {
+        title: "Modes at a glance",
+        text: "Angle and number modes sit right above the display, and a MODE key switches between them, so you always know how the answer was worked out.",
+      },
+      {
+        title: "No ads. Ever.",
+        text: "No banners, no pop-ups, no waiting out a video to see your result. Just the calculator, with your history one tap away.",
+      },
+    ],
     focus: [],
   },
   {
     slug: "mamonis-recipe",
-    number: "02",
+    number: "04",
     title: "Mamoni's Recipe App",
     role: "Design & Development",
     category: "Mobile application",
@@ -133,7 +236,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ai-fitness",
-    number: "03",
+    number: "05",
     title: "AI-Backed Fitness Application",
     role: "Full-Stack UI & Backend",
     category: "Application development",
@@ -151,7 +254,7 @@ export const projects: Project[] = [
   },
   {
     slug: "reichswacht",
-    number: "04",
+    number: "06",
     title: "REICHSWACHT System Design",
     role: "Alternative History Modding & Lore",
     category: "Systems & worldbuilding",
@@ -169,7 +272,7 @@ export const projects: Project[] = [
   },
   {
     slug: "minimalist-emblems",
-    number: "05",
+    number: "07",
     title: "Custom Minimalist Emblems",
     role: "Vector Graphic Design",
     category: "Visual identity",
