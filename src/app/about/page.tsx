@@ -41,11 +41,11 @@ const experiences = [
 const achievements = [
   {
     rank: "1st",
-    scope: "Engineering Solution",
+    scope: "Best project nationally",
     title: "July Hackathon 2026",
     year: "2026",
     description:
-      "Won 1st place in the Engineering Solution category and finished 4th nationally overall, competing against teams from top universities across Bangladesh.",
+      "Won with Songket, an offline Bluetooth mesh messenger, named the best project nationally against teams from top universities across Bangladesh.",
   },
   {
     rank: "Finalist",

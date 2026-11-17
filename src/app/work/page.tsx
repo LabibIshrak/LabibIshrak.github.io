@@ -1,43 +1,32 @@
 import type { Metadata } from "next";
-import { ArrowLeft } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
-import { TransitionLink } from "@/components/runtime";
-import { WorkIndex } from "@/components/work-index";
+import { WorkArchive } from "@/components/work-archive";
+import "./work.css";
 
 export const metadata: Metadata = {
-  title: "All work",
+  title: "Work",
   description:
-    "Applications, systems design, and visual experiments by Hasin Ishrak Labib.",
+    "Apps, systems and design work by Hasin Ishrak Labib, including Songket, winner of July Hackathon 2026.",
 };
 
-export default function AllWorkPage() {
+export default function WorkPage() {
   return (
     <div className="page-shell">
-      <main id="main" className="main-curtain editorial-archive">
+      <main id="main" className="main-curtain wk-main">
         <Navigation />
 
-        <header className="editorial-archive-header editorial-container">
-          <TransitionLink href="/" className="back-link">
-            <ArrowLeft size={18} />
-            Back to home
-          </TransitionLink>
-
-          <p className="editorial-label">APPLICATIONS / SYSTEMS / DESIGN</p>
-
-          <h1 data-page-heading tabIndex={-1}>
-            Different ideas.
-            <br />
-            The same care.
-          </h1>
-
-          <p className="editorial-archive-description">
-            A collection of software projects, system studies, and visual
-            experiments. Select a project to explore its case study.
-          </p>
+        <header className="wk-hero">
+          <div className="wk-wrap">
+            <h1 className="wk-display" data-page-heading tabIndex={-1}>
+              Software built for
+              <br />
+              the real world
+            </h1>
+          </div>
         </header>
 
-        <WorkIndex all />
+        <WorkArchive />
       </main>
 
       <Footer />
