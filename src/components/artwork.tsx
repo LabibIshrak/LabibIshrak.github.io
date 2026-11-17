@@ -1,6 +1,15 @@
 import type { Project } from "@/lib/content";
+import { SongketArtwork } from "./artwork-songket";
 
 export function ProjectArtwork({ project }: { project: Project }) {
+  if (project.artwork === "songket") {
+    return (
+      <div className="project-artwork artwork-songket" style={{ backgroundColor: project.color }}>
+        <SongketArtwork title={project.title} />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`project-artwork artwork-${project.artwork}`}
