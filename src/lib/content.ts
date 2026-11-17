@@ -5,7 +5,6 @@ export const profile = {
   location: "Bangladesh",
   timezone: "Asia/Dhaka",
 
-  // Add your real contact destinations before publishing.
   email: "labib.240118@s.pust.ac.bd",
   github: "https://github.com/LabibIshrak",
   linkedin: "https://www.linkedin.com/in/hasin-ishrak-labib",
