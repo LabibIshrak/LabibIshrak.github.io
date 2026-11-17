@@ -9,7 +9,7 @@
   --accent: #455ce9;
   --rule: rgb(255 255 255 / 17%);
   --gutter: clamp(22px, 5vw, 90px);
-  --sans: var(--font-outfit, 'Outfit'), var(--font-bengali, 'Noto Sans Bengali'), Arial, Helvetica, sans-serif;
+  --sans: var(--font-sans, 'Hanken Grotesk'), var(--font-bengali, 'Noto Sans Bengali'), Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -27,7 +27,12 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--sans);
+  font-weight: 450;
+  font-kerning: normal;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -62,7 +67,7 @@ p {
 h1,
 h2,
 h3 {
-  font-weight: 500;
+  font-weight: 450;
 }
 
 svg {
@@ -130,7 +135,7 @@ button:focus-visible,
 .eyebrow,
 .footer-label {
   font-size: 10px;
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.6;
   letter-spacing: 0.11em;
 }
@@ -182,7 +187,7 @@ button:focus-visible,
   align-items: center;
   gap: 10px;
   font-size: 17.5px;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.0075em;
 }
 
 .wordmark-symbol {
@@ -208,7 +213,7 @@ button:focus-visible,
   gap: 8px;
   min-height: 44px;
   font-size: 17.5px;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.0075em;
 }
 
 .desktop-navigation a::after {
@@ -247,7 +252,7 @@ button:focus-visible,
   background: #111214;
   color: var(--foreground);
   font-size: clamp(36px, 5vw, 76px);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.0225em;
 }
 
 .preloader {
@@ -378,12 +383,12 @@ button:focus-visible,
   top: 42%;
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 16px 16px 16px 36px;
+  gap: clamp(20px, 2vw, 32px);
+  padding: 16px 16px 16px clamp(28px, 3vw, 44px);
   border-radius: 0 100px 100px 0;
   background: var(--background);
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.25;
 }
 
@@ -404,7 +409,7 @@ button:focus-visible,
 
 .hero-introduction > p:first-of-type {
   font-size: clamp(23px, 2.8vw, 36px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.35;
   letter-spacing: 0em;
   color: #fff;
@@ -412,7 +417,7 @@ button:focus-visible,
 
 .hero-subtext {
   font-size: clamp(23px, 2.8vw, 36px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.35;
   letter-spacing: 0em;
   color: #fff;
@@ -478,9 +483,9 @@ button:focus-visible,
   top: 50%;
   left: 50%;
   font-size: clamp(1.5rem, 3.5vw, 4.5rem);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   color: rgb(255 255 255 / 55%);
   opacity: 0;
@@ -507,7 +512,7 @@ button:focus-visible,
   font-size: clamp(64px, 11vw, 170px);
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: #ececec;
 }
 
@@ -683,7 +688,7 @@ button:focus-visible,
   margin-top: 25px;
   font-size: clamp(47px, 8vw, 132px);
   line-height: 1.03;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.0325em;
   overflow-wrap: anywhere;
 }
 
@@ -725,13 +730,13 @@ button:focus-visible,
 
 .case-overview h2 {
   font-size: clamp(30px, 4vw, 60px);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.0225em;
 }
 
 .case-overview > div > p:first-child {
   font-size: clamp(23px, 2.3vw, 34px);
   line-height: 1.4;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.0125em;
 }
 
 .case-overview ul {
@@ -766,7 +771,7 @@ button:focus-visible,
   margin-top: 20px;
   font-size: clamp(28px, 4.3vw, 65px);
   line-height: 1.1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 
 .next-project-title svg {
@@ -787,7 +792,7 @@ button:focus-visible,
 
 .not-found h1 {
   font-size: clamp(60px, 10vw, 140px);
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
 }
 
 /* Tablet */
@@ -917,7 +922,7 @@ button:focus-visible,
     justify-content: space-between;
     border-bottom: 1px solid var(--rule);
     font-size: 30px;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
   }
 
   .hero {
@@ -953,9 +958,8 @@ button:focus-visible,
 
   .hero-subtext {
     max-width: 290px;
-    margin-top: 12px;
-    font-size: 12px;
-    line-height: 1.6;
+    margin-top: 0;
+    font-size: 28px;
   }
 
   .location-badge {
@@ -1155,9 +1159,9 @@ button:focus-visible,
   font-family: var(--sans);
 
   font-size: clamp(90px, 14.5vw, 260px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.08;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.025em;
 }
 
 .hero-marquee-track {
@@ -1191,10 +1195,10 @@ button:focus-visible,
    ========================================= */
 
 .location-badge-copy {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-size: clamp(12px, 1.05vw, 16px);
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
   margin-right: 4px;
 }
 
@@ -1358,7 +1362,7 @@ button:focus-visible,
   }
 
   .location-badge-copy {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .globe-circle {

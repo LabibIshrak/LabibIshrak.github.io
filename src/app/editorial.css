@@ -9,12 +9,20 @@
   --editorial-muted: #a7a8ae;
   --editorial-rule: rgb(238 239 235 / 16%);
   --editorial-accent: #455ce9;
-  --editorial-font: var(--font-outfit, 'Outfit'), Arial, Helvetica, sans-serif;
+  --editorial-font: var(--font-sans, 'Hanken Grotesk'), Arial, Helvetica, sans-serif;
 }
 
 .editorial-container {
-  width: min(1320px, calc(100% - 2 * var(--gutter)));
+  width: min(1240px, calc(100% - 2 * clamp(22px, 8vw, 160px)));
   margin-inline: auto;
+}
+
+/* The intro reads like a quiet paragraph: a narrow measure with wide
+   margins on either side, so the statement has room to breathe. */
+@media (min-width: 901px) {
+  .editorial-about .editorial-container {
+    width: min(1060px, calc(100% - 2 * clamp(22px, 16vw, 260px)));
+  }
 }
 
 .editorial-about,
@@ -28,26 +36,26 @@
 .editorial-label {
   margin: 0;
   color: var(--editorial-muted);
-  font-size: 10px;
-  font-weight: 400;
+  font-size: 11px;
+  font-weight: 450;
   line-height: 1.6;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.08em;
 }
 
 /* About */
 
 .editorial-about {
-  padding-block: clamp(100px, 12vw, 185px) clamp(65px, 7vw, 110px);
+  padding-block: clamp(110px, 13vw, 200px) clamp(90px, 9vw, 140px);
   background: #ffffff;
   color: #1a1a1a;
 }
 
 .editorial-about .editorial-label {
-  color: #666666;
+  color: #85868b;
 }
 
 .editorial-about .editorial-aside > p {
-  color: #3a3a3a;
+  color: #1c1d20;
 }
 
 .editorial-about .editorial-about-button {
@@ -69,22 +77,22 @@
 }
 
 .editorial-about > .editorial-container > .editorial-label {
-  margin-bottom: clamp(30px, 4vw, 60px);
+  margin-bottom: clamp(28px, 3vw, 48px);
 }
 
 .editorial-about-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2.4fr) minmax(230px, 0.9fr);
+  grid-template-columns: minmax(0, 2.6fr) minmax(220px, 1fr);
   align-items: start;
-  gap: clamp(45px, 7vw, 115px);
+  gap: clamp(40px, 4vw, 70px);
 }
 
 .editorial-statement {
   max-width: 930px;
-  font-size: clamp(32px, 3.45vw, 55px);
-  font-weight: 400;
-  line-height: 1.43;
-  letter-spacing: -0.045em;
+  font-size: clamp(26px, 2.35vw, 40px);
+  font-weight: 450;
+  line-height: 1.45;
+  letter-spacing: -0.0225em;
   text-wrap: pretty;
 }
 
@@ -100,17 +108,18 @@
 
 .editorial-aside > p {
   max-width: 300px;
+  padding-top: 0.5em;
   color: #c6c7cc;
-  font-size: clamp(14px, 1.1vw, 17px);
-  font-weight: 400;
-  line-height: 1.85;
-  letter-spacing: -0.02em;
+  font-size: clamp(15px, 1.15vw, 18px);
+  font-weight: 450;
+  line-height: 1.66;
+  letter-spacing: -0.01em;
 }
 
 .editorial-about-button {
   position: relative;
   display: grid;
-  width: clamp(155px, 14vw, 215px);
+  width: clamp(140px, 12vw, 185px);
   aspect-ratio: 1;
   place-items: center;
   overflow: hidden;
@@ -120,7 +129,7 @@
   border-radius: 50%;
   background: #17181b;
   color: var(--editorial-text);
-  font-size: 15px;
+  font-size: 16px;
   isolation: isolate;
 }
 
@@ -173,7 +182,7 @@
   color: #d5d6db;
   font-size: clamp(19px, 2vw, 27px);
   line-height: 1.65;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.0125em;
 }
 
 .editorial-skills {
@@ -194,7 +203,7 @@
 /* Work index */
 
 .editorial-work {
-  padding-block: 0 clamp(85px, 9vw, 145px);
+  padding-block: 0 clamp(100px, 11vw, 180px);
   background: #ffffff;
   color: #1a1a1a;
 }
@@ -212,7 +221,7 @@
 }
 
 .editorial-work .editorial-project-role {
-  color: #4a4a4a;
+  color: #1c1d20;
 }
 
 .editorial-work .editorial-more-button {
@@ -229,7 +238,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding-bottom: 35px;
+  padding-bottom: clamp(28px, 3vw, 45px);
 }
 
 .editorial-project-row {
@@ -237,8 +246,8 @@
   grid-template-columns: minmax(0, 1fr) 215px 28px;
   align-items: center;
   gap: clamp(24px, 3vw, 50px);
-  min-height: clamp(165px, 15vw, 230px);
-  padding: 35px clamp(5px, 2vw, 32px);
+  min-height: clamp(165px, 14vw, 220px);
+  padding: 35px clamp(5px, 2.5vw, 45px);
   border-top: 1px solid var(--editorial-rule);
 }
 
@@ -252,10 +261,10 @@
 
 .editorial-project-title h3 {
   max-width: 850px;
-  font-size: clamp(32px, 4.2vw, 68px);
-  font-weight: 400;
+  font-size: clamp(32px, 4vw, 66px);
+  font-weight: 450;
   line-height: 1.15;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.0275em;
   text-wrap: pretty;
   transition:
     transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -269,9 +278,9 @@
 .editorial-project-role {
   max-width: 215px;
   color: #c7c8cc;
-  font-size: 13px;
-  line-height: 1.65;
-  letter-spacing: -0.015em;
+  font-size: clamp(14px, 1.05vw, 16px);
+  line-height: 1.6;
+  letter-spacing: -0.0075em;
 }
 
 .editorial-project-arrow {
@@ -320,8 +329,8 @@
   border-radius: 100px;
   background: transparent;
   color: var(--editorial-text);
-  font-size: 15px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 450;
   isolation: isolate;
   transition: border-color 250ms;
 }
@@ -362,9 +371,9 @@
 
 .editorial-archive-header h1 {
   font-size: clamp(48px, 7.2vw, 112px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.08;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.03em;
 }
 
 .editorial-archive-description {
@@ -447,7 +456,7 @@
   .editorial-statement {
     font-size: clamp(30px, 7.5vw, 42px);
     line-height: 1.4;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.0225em;
   }
 
   .editorial-aside {
@@ -499,7 +508,7 @@
   .editorial-project-title h3 {
     font-size: clamp(28px, 6.8vw, 39px);
     line-height: 1.17;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.0225em;
   }
 
   .editorial-project-title > span {
@@ -662,7 +671,7 @@
 .alux-eyebrow {
   display: block;
   font-size: 11px;
-  font-weight: 400;
+  font-weight: 450;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #888;
@@ -693,7 +702,7 @@
   font-size: clamp(72px, 13vw, 210px);
   font-weight: 500;
   line-height: 0.95;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.0275em;
   color: #111;
   gap: 0;
 }
@@ -733,7 +742,7 @@
 .alux-meta-val {
   font-size: clamp(14px, 1.2vw, 17px);
   color: #111;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 .alux-available {
@@ -806,9 +815,9 @@
 
 .alux-statement {
   font-size: clamp(22px, 2.8vw, 40px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.45;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   color: #111;
 }
 
@@ -905,7 +914,7 @@
   font-size: 13px;
   color: #111;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 .alux-tl-location {
@@ -967,7 +976,7 @@
 .alux-tl-title {
   font-size: clamp(20px, 2.2vw, 30px);
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   color: #111;
   margin: 0;
   line-height: 1.2;
@@ -989,7 +998,7 @@
   font-size: clamp(14px, 1.1vw, 17px);
   color: #555;
   margin: 8px 0 16px;
-  font-weight: 400;
+  font-weight: 450;
 }
 
 .alux-tl-desc {
@@ -1063,7 +1072,7 @@
 .alux-award-num {
   font-size: clamp(36px, 5vw, 72px);
   font-weight: 600;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.025em;
   line-height: 1;
   color: #ddd;
   transition: color 250ms;
@@ -1091,7 +1100,7 @@
 .alux-award-title {
   font-size: clamp(18px, 2vw, 26px);
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   color: #111;
   margin: 0;
   line-height: 1.2;
@@ -1169,14 +1178,14 @@
 .alux-edu-degree {
   font-size: clamp(18px, 2vw, 26px);
   font-weight: 500;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.015em;
   color: #111;
   margin: 0;
   line-height: 1.25;
 }
 
 .alux-edu-field {
-  font-weight: 400;
+  font-weight: 450;
   color: #555;
 }
 
@@ -1184,7 +1193,7 @@
   font-size: clamp(13px, 1vw, 15px);
   color: #888;
   margin: 6px 0 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 .alux-edu-right {
@@ -1199,7 +1208,7 @@
   font-size: 13px;
   color: #111;
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   white-space: nowrap;
 }
 
@@ -1251,7 +1260,7 @@
   border-radius: 99px;
   border: 1px solid rgb(0 0 0 / 10%);
   color: #444;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   transition: background 220ms, color 220ms, border-color 220ms, transform 220ms;
 }
 
@@ -1287,7 +1296,7 @@
   font-size: clamp(52px, 9vw, 145px);
   font-weight: 500;
   line-height: 0.97;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.0275em;
   color: #f5f4f0;
   margin: 0;
   max-width: 900px;
@@ -1501,7 +1510,7 @@
   font-size: clamp(55px, 9vw, 150px);
   font-weight: 500;
   line-height: 1.05;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.0325em;
   color: #1a1a1a;
 }
 
@@ -1526,9 +1535,9 @@
   grid-column: auto;
   max-width: 800px;
   font-size: clamp(24px, 3vw, 42px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.45;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.0175em;
   color: #2a2a2a;
 }
 
@@ -1575,9 +1584,9 @@
   grid-column: 2;
   max-width: 1000px;
   font-size: clamp(26px, 3.5vw, 48px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.45;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.0175em;
   color: var(--foreground);
 }
 
@@ -1601,7 +1610,7 @@
 .about-page-block p {
   max-width: 480px;
   font-size: clamp(16px, 1.3vw, 19px);
-  font-weight: 400;
+  font-weight: 450;
   line-height: 1.65;
   color: #c6c7cc;
 }
@@ -2069,7 +2078,7 @@
 .timeline-title {
   font-size: clamp(18px, 1.8vw, 24px);
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.3;
   color: var(--foreground);
   margin: 0;
@@ -2184,7 +2193,7 @@
   font-size: clamp(28px, 3vw, 42px);
   font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   color: rgb(69 92 233 / 30%);
   transition: color 350ms;
 }
@@ -2201,7 +2210,7 @@
 .achievement-title {
   font-size: clamp(16px, 1.5vw, 20px);
   font-weight: 500;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
   line-height: 1.3;
   color: var(--foreground);
   margin: 0;
@@ -2258,7 +2267,7 @@
   font-size: 14px;
   font-weight: 500;
   color: var(--foreground);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 
 .education-location {
@@ -2269,7 +2278,7 @@
 .education-degree {
   font-size: clamp(20px, 2vw, 28px);
   font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.0125em;
   line-height: 1.3;
   color: var(--foreground);
   margin: 0;
