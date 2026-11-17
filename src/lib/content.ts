@@ -6,10 +6,12 @@ export const profile = {
   timezone: "Asia/Dhaka",
 
   // Add your real contact destinations before publishing.
-  email: "241hasinishraklabib@gmail.com",
-  github: "",
-  linkedin: "",
-  lastfm: "",
+  email: "labib.240113@s.pust.ac.bd",
+  github: "https://github.com/LabibIshrak",
+  linkedin: "https://www.linkedin.com/in/hasin-ishrak-labib",
+  instagram: "https://www.instagram.com/ishraklabib_/",
+  spotify: "https://open.spotify.com/user/31lj5ttyzrbauvlbagrfzubnp7my",
+  letterboxd: "https://letterboxd.com/ishraklabib/",
 
   introduction:
     "Helping build robust applications and complex systems. No nonsense, always on the cutting edge.",

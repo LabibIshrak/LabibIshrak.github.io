@@ -7,7 +7,9 @@ const FOOTER_ID = "contact";
 const socials = [
   ["GitHub", profile.github],
   ["LinkedIn", profile.linkedin],
-  ["Last.fm", profile.lastfm],
+  ["Instagram", profile.instagram],
+  ["Spotify", profile.spotify],
+  ["Letterboxd", profile.letterboxd],
 ];
 
 type FooterProps = {
