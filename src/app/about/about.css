@@ -582,3 +582,51 @@
     transition: none;
   }
 }
+
+/* ── Way back (replaces the contact warp on this page) ── */
+
+.ab-return {
+  padding-block: clamp(100px, 11vw, 180px) clamp(140px, 15vw, 240px);
+  border-top: 1px solid var(--ab-line);
+  text-align: center;
+}
+
+.ab-return-link {
+  display: inline-block;
+  color: var(--ab-ink);
+  text-decoration: none;
+}
+
+.ab-return-link .return-eyebrow {
+  display: block;
+  margin-bottom: 26px;
+  color: var(--ab-muted);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ab-return-link .return-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  font-size: clamp(48px, 7vw, 120px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  transition: color 0.45s;
+}
+
+.ab-return-link .return-title svg {
+  width: 0.6em;
+  height: 0.6em;
+  stroke-width: 1.4;
+  transition: transform 0.45s;
+}
+
+.ab-return-link:hover .return-title {
+  color: var(--ab-muted);
+}
+
+.ab-return-link:hover .return-title svg {
+  transform: translateX(-0.12em);
+}

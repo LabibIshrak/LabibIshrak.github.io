@@ -10,10 +10,15 @@ const socials = [
   ["Last.fm", profile.lastfm],
 ];
 
-export function Footer() {
+type FooterProps = {
+  /** Show the contact warp before the footer. Inner pages turn it off. */
+  contact?: boolean;
+};
+
+export function Footer({ contact = true }: FooterProps) {
   return (
     <>
-      <ContactTransition />
+      {contact && <ContactTransition />}
       <footer id={FOOTER_ID} className="ale-footer">
         <div className="ale-footer-frame footer-content">
           <span className="ale-bracket is-left" aria-hidden="true" />
@@ -44,7 +49,7 @@ export function Footer() {
               <ul className="ale-footer-links">
                 <li><a href="/about">About me</a></li>
                 <li><a href="/#work">Work</a></li>
-                <li><a href="#contact-intro">Contact</a></li>
+                <li><a href={contact ? "#contact-intro" : "#contact"}>Contact</a></li>
               </ul>
             </div>
 

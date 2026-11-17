@@ -5,6 +5,7 @@ import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { RotatingGlobe } from "@/components/rotating-globe";
 import { AboutPageAnimations } from "@/components/about-page-animations";
+import { ReturnLink } from "@/components/return-link";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -101,7 +102,7 @@ export default function AboutPage() {
   return (
     <div className="page-shell">
       <main id="main" className="main-curtain about-lux-main">
-        <Navigation />
+        <Navigation contactHref="#contact" />
 
         <AboutPageAnimations>
           {/* ── Hero ── */}
@@ -284,10 +285,14 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
+          {/* ── Way back ── */}
+          <nav className="ab-return" aria-label="Return">
+            <ReturnLink fallback="/" className="ab-return-link" eyebrow="Thanks for stopping by" />
+          </nav>
         </AboutPageAnimations>
       </main>
 
-      <Footer />
+      <Footer contact={false} />
     </div>
   );
 }

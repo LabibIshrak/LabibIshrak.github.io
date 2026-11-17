@@ -33,7 +33,7 @@ export type Project = {
   kind: ProjectKind;
   year?: string;
   color: string;
-  artwork: "songket" | "lunar" | "calcrex" | "recipe" | "fitness" | "system" | "emblem";
+  artwork: "songket" | "lunar" | "calcrex" | "bongojatra";
   introduction: string;
   focus: string[];
 
@@ -217,75 +217,58 @@ export const projects: Project[] = [
     focus: [],
   },
   {
-    slug: "mamonis-recipe",
+    slug: "bongojatra",
     number: "04",
-    title: "Mamoni's Recipe App",
+    title: "BongoJatra",
     role: "Design & Development",
-    category: "Mobile application",
-    technology: "Flutter",
+    category: "Transport platform",
+    technology: "Flutter · Java · Groq AI",
     kind: "Development",
-    color: "#cfddd0",
-    artwork: "recipe",
-    introduction:
-      "A Flutter recipe application. This case-study scaffold is ready for the actual product story, interface screens, implementation details, and development decisions.",
-    focus: [
-      "Document the recipe browsing and detail flows.",
-      "Explain the Flutter component structure and state management.",
-      "Add real screenshots and describe what you learned.",
+    year: "2026",
+    color: "#033a2b",
+    artwork: "bongojatra",
+    award: "University project · Bus, train and launch in one search",
+    location: "Bangladesh",
+    links: [
+      { label: "GitHub", href: "https://github.com/LabibIshrak/academic_projects/tree/main/bongojatra" },
     ],
-  },
-  {
-    slug: "ai-fitness",
-    number: "05",
-    title: "AI-Backed Fitness Application",
-    role: "Full-Stack UI & Backend",
-    category: "Application development",
-    technology: "Stack to be documented",
-    kind: "Development",
-    color: "#c5c4ed",
-    artwork: "fitness",
     introduction:
-      "An AI-backed fitness application. Replace this scaffold with the actual user problem, the role of AI, the backend architecture, and the boundaries of the system.",
-    focus: [
-      "Describe the core fitness workflow and intended audience.",
-      "Document the frontend/backend contract and AI integration.",
-      "Add measured results only when they are available.",
+      "BongoJatra is a unified transport platform for Bangladesh. Buses, trains and river launches live in one app, so a single search shows every way to get between two cities. An AI advisor picks the best option for you, and you can choose your seat, pay and walk away with a QR ticket, all in one flow.",
+    problem:
+      "Travelling across Bangladesh means checking a different place for every mode: bus counters, the railway site, launch terminals. Nobody compares them side by side, so passengers rarely know whether the bus, the train or the launch is faster, cheaper or more comfortable today. BongoJatra puts every mode on one screen.",
+    features: [
+      {
+        title: "One search, every mode",
+        text: "Pick where you're going and when. Bus, train and launch results come back together, filterable and sortable by price, speed or comfort.",
+      },
+      {
+        title: "AI that picks for you",
+        text: "An AI advisor reads every option for your route and recommends one, explains why it fits whether you want fastest, cheapest, most comfortable or scenic, and adds a practical travel tip.",
+      },
+      {
+        title: "Real seat maps",
+        text: "Each vehicle has its own layout: 2+2 coach seats, train classes and coaches, and launch decks and cabins, with taken seats greyed out.",
+      },
+      {
+        title: "Explore the country",
+        text: "Browse all eight divisions and nearby cities from where you are, with the modes that serve them and the lowest fare, in English and Bangla.",
+      },
+      {
+        title: "Pay the local way",
+        text: "Check out with bKash or a card, then get a ticket with a QR code that you can download as a PDF.",
+      },
+      {
+        title: "Your trips in one place",
+        text: "Sign in with Google to keep every booking together, view your tickets again, and cancel when plans change.",
+      },
     ],
-  },
-  {
-    slug: "reichswacht",
-    number: "06",
-    title: "REICHSWACHT System Design",
-    role: "Alternative History Modding & Lore",
-    category: "Systems & worldbuilding",
-    technology: "Modding / systems design",
-    kind: "Systems",
-    color: "#b4c4cd",
-    artwork: "system",
-    introduction:
-      "An alternative-history modding and lore project. Use this page to explain the fictional setting, interacting systems, design constraints, and implementation approach.",
-    focus: [
-      "Introduce the fictional world and the design brief.",
-      "Show how mechanics and narrative systems connect.",
-      "Include representative diagrams and in-game examples.",
+    stack: [
+      ["App", "Flutter, with flutter_animate and Google Fonts"],
+      ["Backend", "Plain Java 17 HTTP server, no frameworks"],
+      ["AI", "Groq API, Llama 3.1 8B, with a local fallback"],
+      ["Sign-in", "Google sign-in with Firebase Authentication"],
+      ["Tickets", "PDF generation and QR codes on device"],
     ],
-  },
-  {
-    slug: "minimalist-emblems",
-    number: "07",
-    title: "Custom Minimalist Emblems",
-    role: "Vector Graphic Design",
-    category: "Visual identity",
-    technology: "Vector design",
-    kind: "Design",
-    color: "#ded9cf",
-    artwork: "emblem",
-    introduction:
-      "A collection of minimalist vector emblems. Replace these abstract placeholders with your original marks, construction studies, and real design rationale.",
-    focus: [
-      "Show the original briefs and visual constraints.",
-      "Include construction grids and iteration studies.",
-      "Demonstrate legibility across different sizes.",
-    ],
+    focus: [],
   },
 ];

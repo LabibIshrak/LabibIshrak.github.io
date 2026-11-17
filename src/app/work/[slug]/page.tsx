@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { ProjectArtwork } from "@/components/artwork";
 import { TransitionLink } from "@/components/runtime";
 import { YouTubeEmbed } from "@/components/youtube-embed";
+import { ReturnLink } from "@/components/return-link";
 import "../work.css";
 
 type Props = {
@@ -43,7 +44,7 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <div className="page-shell">
       <main id="main" className="main-curtain wk-main cs-main">
-        <Navigation />
+        <Navigation contactHref="#contact" />
 
         <article>
           {/* ── Title + meta ── */}
@@ -224,15 +225,13 @@ export default async function ProjectPage({ params }: Props) {
                 <span className="cs-next-title">{next.title}</span>
               </TransitionLink>
 
-              <TransitionLink href="/work" className="wk-pill cs-all" data-magnetic>
-                All work<sup>{projects.length}</sup>
-              </TransitionLink>
+              <ReturnLink fallback="/work" className="wk-pill cs-all" />
             </div>
           </nav>
         </article>
       </main>
 
-      <Footer />
+      <Footer contact={false} />
     </div>
   );
 }

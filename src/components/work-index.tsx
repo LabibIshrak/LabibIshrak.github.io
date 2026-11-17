@@ -4,12 +4,15 @@ import { ProjectArtwork } from "./artwork";
 import { TransitionLink } from "./runtime";
 import { WorkIndexMotion } from "./work-index-motion";
 
+/** Projects featured on the home page, in order. */
+const FEATURED = ["songket", "lunar-life", "calcrex"];
+
 type WorkIndexProps = {
   all?: boolean;
 };
 
 export function WorkIndex({ all = false }: WorkIndexProps) {
-  const visibleProjects = all ? projects : projects.slice(0, 2);
+  const visibleProjects = all ? projects : FEATURED.flatMap((slug) => projects.filter((p) => p.slug === slug));
 
   return (
     <section

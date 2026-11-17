@@ -23,14 +23,46 @@ const CURTAIN_EASE = CustomEase.create(
   "M0,0 C0.76,0 0.24,1 1,1",
 );
 
+type NavigateOptions = {
+  /** Scroll position to land on instead of the top of the page. */
+  y?: number;
+};
+
 type NavigationContextValue = {
-  navigate: (href: string) => Promise<void>;
+  navigate: (href: string, options?: NavigateOptions) => Promise<void>;
   busy: boolean;
 };
 
 const NavigationContext = createContext<NavigationContextValue | null>(
   null,
 );
+
+/** The site's curtain navigation, for links that need more than TransitionLink. */
+export function useSiteNavigation() {
+  return useContext(NavigationContext);
+}
+
+/*
+ * Where a visitor entered the inner pages from, so the about page and case
+ * studies can send them back there instead of on to contact. Moving between
+ * case studies ("Next case") keeps the original entry point.
+ */
+export const RETURN_STORAGE_KEY = "labib-return-to";
+
+const isCaseStudy = (path: string) => path.startsWith("/work/");
+
+function rememberReturn(from: string, to: string) {
+  if (from === to || (isCaseStudy(from) && isCaseStudy(to))) return;
+
+  try {
+    sessionStorage.setItem(
+      RETURN_STORAGE_KEY,
+      JSON.stringify({ path: from, y: Math.round(window.scrollY) }),
+    );
+  } catch {
+    // Storage blocked: the return link falls back to its default.
+  }
+}
 
 const greetings = [
   "Hello",
@@ -382,6 +414,7 @@ export function TransitionLink({
 type PendingNavigation = {
   path: string;
   hash: string;
+  y?: number;
 };
 
 export function Runtime({ children }: { children: ReactNode }) {
@@ -430,7 +463,7 @@ export function Runtime({ children }: { children: ReactNode }) {
   // Stable for the lifetime of the app: reads the pathname from a ref,
   // so consumers of the context don't re-render on every route change.
   const navigate = useCallback(
-    async (href: string) => {
+    async (href: string, options?: NavigateOptions) => {
       if (busyRef.current) return;
 
       const hashIndex = href.indexOf("#");
@@ -447,20 +480,22 @@ export function Runtime({ children }: { children: ReactNode }) {
         return;
       }
 
-      if (prefersReducedMotion()) {
-        router.push(href);
-        return;
-      }
+      rememberReturn(pathnameRef.current, path);
 
       const curtain = curtainRef.current;
-      if (!curtain) {
-        router.push(href);
+      if (prefersReducedMotion() || !curtain) {
+        if (options?.y !== undefined) {
+          pendingRef.current = { path, hash, y: options.y };
+          router.push(href, { scroll: false });
+        } else {
+          router.push(href);
+        }
         return;
       }
 
       busyRef.current = true;
       setBusy(true);
-      pendingRef.current = { path, hash };
+      pendingRef.current = { path, hash, y: options?.y };
       lenisRef.current?.stop();
 
       // A failed navigation should never permanently cover the website.
@@ -516,7 +551,10 @@ export function Runtime({ children }: { children: ReactNode }) {
       frame = requestAnimationFrame(() => {
         ScrollTrigger.refresh();
 
-        if (pending.hash) {
+        if (pending.y !== undefined) {
+          lenisRef.current?.scrollTo(pending.y, { immediate: true, force: true });
+          window.scrollTo(0, pending.y);
+        } else if (pending.hash) {
           scrollToHash(pending.hash, lenisRef.current, true);
         }
 
@@ -533,7 +571,7 @@ export function Runtime({ children }: { children: ReactNode }) {
           lenisRef.current?.start();
         };
 
-        if (!curtain) {
+        if (!curtain || !busyRef.current) {
           finish();
           return;
         }

@@ -463,7 +463,7 @@ export function CalcrexArtwork({ title }: { title: string }) {
         {/* Thinking dots */}
         {[0, 1, 2].map((i) => (
           <circle key={i} cx={128 + i * 9} cy="88" r="2.4" fill={BLUE} opacity="0">
-            <animate attributeName="opacity" values="0;0;1;0.2;1;0;0" keyTimes={keyTimes(0, 0.62, 0.625 + i * 0.004, 0.63 + i * 0.004, 0.636 + i * 0.004, 0.64, 1)} dur={DUR} repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0;0;1;0.2;1;0;0" keyTimes={keyTimes(0, 0.62, 0.625 + i * 0.004, 0.63 + i * 0.004, 0.636 + i * 0.004, 0.65, 1)} dur={DUR} repeatCount="indefinite" />
           </circle>
         ))}
       </g>
