@@ -19,6 +19,7 @@ const experiences = [
   {
     title: "Co-founder & CEO",
     company: "Vantaloc",
+    logo: "/vantaloc-logo.png",
     type: "Full-time · SaaS",
     period: "2025 — Present",
     description:
@@ -28,6 +29,7 @@ const experiences = [
   {
     title: "Product Lead",
     company: "Mezai Tech",
+    logo: "/mezai-tech-logo.png",
     type: "Part-time · Digital Services",
     period: "2025 — Present",
     description:
@@ -160,10 +162,10 @@ export default function AboutPage() {
               <figure className="ab-portrait" data-ab-portrait>
                 <div className="ab-portrait-inner">
                   <Image
-                    src="/portrait.png"
-                    alt="Hasin Ishrak Labib"
+                    src="/about-portrait.jpg"
+                    alt="Black and white portrait of Hasin Ishrak Labib"
                     fill
-                    sizes="(max-width: 900px) 90vw, 40vw"
+                    sizes="(max-width: 760px) 92vw, 42vw"
                     className="ab-portrait-img"
                     priority
                   />
@@ -183,10 +185,21 @@ export default function AboutPage() {
                 {experiences.map((exp, i) => (
                   <article className="ab-col" key={exp.company} data-ab-reveal>
                     <h5 className="ab-index">{pad(i + 1)}</h5>
-                    <h3 className="ab-col-title">{exp.title}</h3>
-                    <p className="ab-col-sub">
-                      {exp.company} <span>· {exp.type}</span>
-                    </p>
+                    <div className="ab-exp-head">
+                      <Image
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        width={52}
+                        height={52}
+                        className="ab-exp-logo"
+                      />
+                      <div>
+                        <h3 className="ab-col-title">{exp.title}</h3>
+                        <p className="ab-col-sub">
+                          {exp.company} <span>· {exp.type}</span>
+                        </p>
+                      </div>
+                    </div>
                     <p className="ab-col-meta">{exp.period}</p>
                     <p className="ab-col-text">{exp.description}</p>
                     <p className="ab-col-tags">{exp.skills.join("  /  ")}</p>
